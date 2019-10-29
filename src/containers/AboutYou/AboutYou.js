@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import classes from './AboutYou.css';
 
@@ -64,9 +65,10 @@ class AboutYou extends Component {
 				touched: false
 			}
 		},
-		formIsValid: false
+		formIsValid: false,
+		continuing: false
 	}
-
+	//
 	stepOneHandler = (event) => {
 		event.preventDefault();
 		const formData = {};
@@ -74,7 +76,44 @@ class AboutYou extends Component {
 			formData[formElementIdentifier] = this.state.personalInfo[formElementIdentifier].value;
 		}
 	}
+	// Passes props to form page indicating input is being changed and validity should always be checked
+	inputChangedHandler = (event, inputIdentifier) => {
+		const updatedStepOneForm = {
+			...this.state.personalInfo
+		};
+		const updatedFormElement = {
+			...updatedStepOneForm[inputIdentifier]
+		};
+		updatedFormElement.value = event.target.value;
+		updatedFormElement.valid = this.checkValidity(updatedFormElement, updatedFormElement.validation);
+		updatedFormElement.touched = true;
+		updatedStepOneForm[inputIdentifier] = updatedFormElement;
+		let updatedFormIsValid = true;
+		for (let inputIdentifier in updatedStepOneForm) {
+			updatedFormIsValid = updatedStepOneForm[inputIdentifier].valid && updatedFormIsValid;
+		}
+		this.setState({personalInfo: updatedStepOneForm, formIsValid: updatedFormIsValid});
+	}
 
+	// Check user follows rules of each input
+	checkValidity = (value, rules) => {
+		let isValid = true;
+		if (rules.required) {
+			isValid = value.value.trim() !== '' && isValid;
+		}
+		if (rules.minLength) {
+			isValid = (value.value.length >= rules.minLength) && isValid;
+		}
+		if (rules.maxLength) {
+			isValid = (value.value.length <= rules.maxLength) && isValid;
+		}
+
+		return isValid;
+	}
+
+	nextClicked = () => {
+		this.setState({continuing: true});
+	}
 	render() {
 		const formElementsArray = [];
 		for (let key in this.state.personalInfo) {
@@ -97,7 +136,7 @@ class AboutYou extends Component {
 						invalid={!formElement.config.valid}
 						changed={(event) => this.inputChangedHandler(event, formElement.id)} />
 				))}
-				<button btnType="Success">"Next" Create Button component</button>
+				<Button btnType="Success" disabled={!this.state.formIsValid}  clicked={this.nextClicked}>Next</Button>
 			</form>
 		);
 

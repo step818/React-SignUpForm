@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import classes from './App.css';
 import AboutYou from './containers/AboutYou/AboutYou';
+import AboutYourRest from './'
 
 class App extends Component {
     state = {
@@ -211,6 +212,7 @@ class App extends Component {
         return (
         <div classname={classes.App}>
             <AboutYou/>
+            <AboutYourRest show={this.state.secondStep} abtRestClosed={this.backClickHandler} />
         </div>
         );
     }
