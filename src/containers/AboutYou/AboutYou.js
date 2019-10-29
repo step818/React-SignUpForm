@@ -68,7 +68,10 @@ class AboutYou extends Component {
 		return(
 			<div className={classes.AboutYou}>
 				<p>Tell us about you</p>
-				
+				<p>Input First Name</p>
+				<p>Input Last Name</p>
+				<p>Input Email address</p>
+				<p>Input phone number</p>
 			</div>
 		);
 	}
