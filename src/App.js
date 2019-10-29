@@ -1,66 +1,12 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import './App.css';
-import Home from './components/Home';
+import classes from './App.css';
+import AboutYou from './containers/AboutYou/AboutYou';
 
 class App extends Component {
     state = {
         signUpForm: {
-            personalInfo: {
-                firstName: {
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'text',
-                        placeholder: 'First Name'
-                    },
-                    value: '',
-                    validation: {
-                        required: true
-                    },
-                    valid: false,
-                    touched: false
-                },
-                lastName: {
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'text',
-                        placeholder: 'Last Name'
-                    },
-                    value: '',
-                    validation: {
-                        required: true
-                    },
-                    valid: false,
-                    touched: false
-                },
-                emailAddress: {
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'email',
-                        placeholder: 'Email Address'
-                    },
-                    value: '',
-                    validation: {
-                        required: true
-                    },
-                    valid: false,
-                    touched: false
-                },
-                phoneNumber: {
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'text',
-                        placeholder: 'Phone Number'
-                    },
-                    value: '',
-                    validation: {
-                        required: true
-                    },
-                    valid: false,
-                    touched: false
-                }
-            },
             restaurantInfo: {
                 restaurantName: {
                     elementType: 'input',
@@ -263,8 +209,8 @@ class App extends Component {
 
     render() {
         return (
-        <div>
-            <Home/>
+        <div classname={classes.App}>
+            <AboutYou/>
         </div>
         );
     }
