@@ -180,18 +180,94 @@ class App extends Component {
                 }
             },
             photoInfo: {
-                elementType: 'select'
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {value: 'Option 1'},
+                        {Value: 'Option 2'}
+                    ]
+                },
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false,
+                isOption2: false,
+                date: '',
+                time: ''
+            },
+            checkoutInfo: {
+                legalName: {
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'text',
+                        placeholder: 'Legal/Business Name'
+                    },
+                    value: '',
+                    validation: {
+                        required: true
+                    },
+                    valid: false,
+                    touched: false
+                },
+                einNumber: {
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'text',
+                        placeholder: 'EIN Number(GST/HST Number for Canada)'
+                    },
+                    value: '',
+                    validation: {
+                        required: true,
+                        minLength: 9,
+                        maxLength: 9
+                    },
+                    valid: false,
+                    touched: false
+                },
+                routingNumber: {
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'text',
+                        placeholder: 'Routing Number(Transit Number)'
+                    },
+                    value: '',
+                    validation: {
+                        required: true
+                    },
+                    valid: false,
+                    touched: false
+                },
+                accountNumber: {
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'text',
+                        placeholder: 'Account Number'
+                    },
+                    value: '',
+                    validation: {
+                        required: true,
+                        minLength: 10,
+                        maxLength: 12
+                    },
+                    valid: false,
+                    touched: false
+                }
+            },
+            agreeToTerms: {
+                agreed: false
             }
         }
     }
 
-  render() {
-    return (
-      <div>
-        <Home/>
-      </div>
-    );
-  }
+    render() {
+        return (
+        <div>
+            <Home/>
+        </div>
+        );
+    }
 }
 
 export default App;
