@@ -156,12 +156,6 @@ class AboutYou extends Component {
 				</div>
 				<AboutYourRest show={this.state.continuing} />
 			</Auxillary>
-			
-			
-				
-					
-				
-	
 		);
 	}
 }
