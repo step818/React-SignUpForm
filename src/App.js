@@ -212,7 +212,7 @@ class App extends Component {
         return (
         <div classname={classes.App}>
             <AboutYou/>
-            <AboutYourRest show={this.state.secondStep} abtRestClosed={this.backClickHandler} />
+            {/* <AboutYourRest show={this.state.secondStep} abtRestClosed={this.backClickHandler} /> */}
         </div>
         );
     }

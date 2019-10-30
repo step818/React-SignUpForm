@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
+import Auxillary from '../../hoc/Auxillary/Auxillary';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import classes from './AboutYou.css';
+import AboutYourRest from '../AboutYourRest/AboutYourRest';
 
 class AboutYou extends Component {
 	// constructor(props) {
@@ -141,10 +143,25 @@ class AboutYou extends Component {
 		);
 
 		return(
-			<div className={classes.AboutYou}>
-				<p>Tell us about you</p>
-				{form}
-			</div>
+			<Auxillary>
+				<div 
+					className={classes.AboutYou}
+					style={{
+						transform: this.state.continuing ? 'translateY(-100vh)' : 'translateY(0)',
+						opacity: this.state.continuing ? '0' : '1'
+					}}
+					>
+					<p>Tell us about you</p>
+					{form}
+				</div>
+				<AboutYourRest show={this.state.continuing} />
+			</Auxillary>
+			
+			
+				
+					
+				
+	
 		);
 	}
 }
