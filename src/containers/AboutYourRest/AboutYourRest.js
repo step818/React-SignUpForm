@@ -104,6 +104,11 @@ class AboutYourRest extends Component {
 		continuing: false
 	}
 	//
+	previous = e => {
+		e.preventDefault();
+		this.props.prevStep();
+	}
+
 	stepTwoHandler = (event) => {
 		event.preventDefault();
 		const formData = {};
@@ -137,10 +142,6 @@ class AboutYourRest extends Component {
 		}
 		return isValid;
 	}
-
-	nextClicked = () => {
-		this.setState({continuing: true});
-	}
 	render() {
 		const formElementsArray = [];
 		for (let key in this.state.restaurantInfo) {
@@ -163,6 +164,7 @@ class AboutYourRest extends Component {
 						invalid={!formElement.config.valid}
 						changed={(event) => this.inputChangedHandler(event, formElement.id)} />
 				))}
+				<Button btnType="Danger" clicked={this.previous}>Back</Button>
 				<Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.nextClicked}>Next</Button>
 			</form>
 		);

@@ -35,7 +35,9 @@ class SignupProcess extends Component {
                 )
             case 2:
                 return (
-                    <AboutYourRest />
+                    <AboutYourRest
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}/>
                 )
             case 3:
                 return (

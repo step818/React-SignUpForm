@@ -133,7 +133,7 @@ class AboutYou extends Component {
 						invalid={!formElement.config.valid}
 						changed={(event) => this.inputChangedHandler(event, formElement.id)} />
 				))}
-				<Button btnType="Success" disabled={!this.state.formIsValid}  onClick={this.continue}>Next</Button>
+				<Button btnType="Success" disabled={!this.state.formIsValid}  clicked={this.continue}>Next</Button>
 			</form>
 		);
 
