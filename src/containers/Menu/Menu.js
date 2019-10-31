@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -30,11 +30,12 @@ export class Menu extends Component {
 	}
 
   render() {
+    // Assign each element in the form array an id and config
     const formElementsArray = [];
-    for (let key in this.state.menuInfo) {
+    for (let key in this.state) {
       formElementsArray.push({
         id: key,
-        config: this.state.menuInfo[key]
+        config: this.state[key]
       });
     }
     let form = (
@@ -49,7 +50,7 @@ export class Menu extends Component {
             touched={formElement.config.touched}
             shouldValidate={formElement.config.validation}
             invalid={!formElement.config.valid}
-            changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+            changed={(event) => this.props.inputChangedHandler(event, formElement.id)} />
         ))}
         <Button btnType="Danger" clicked={this.previous}>Back</Button>
         <Button btnType="Success" clicked={this.continue}>Next</Button>

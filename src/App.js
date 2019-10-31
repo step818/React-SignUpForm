@@ -10,16 +10,7 @@ class App extends Component {
             
                 // country: { add dropdown to select country.}
             },
-            serviceMethod: {
-                elementType: 'select',
-                elementConfig: {
-                    options: [
-                        {value: 'dineIn'},
-                        {value: 'takeOut'},
-                        {value: 'dineInAndTakeOut'}
-                    ]
-                }
-            },
+            
             photoInfo: {
                 elementType: 'select',
                 elementConfig: {

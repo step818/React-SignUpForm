@@ -4,13 +4,11 @@ import React, { Component } from 'react'
 import AboutYou from '../AboutYou/AboutYou';
 import AboutYourRest from '../AboutYourRest/AboutYourRest';
 import Menu from '../Menu/Menu';
+import Services from '../Services/Services';
 
 class SignupProcess extends Component {
     state = {
-        step: 1,
-        signUpForm: {
-
-        }
+        step: 1
     }
     //Proceed to next step
     nextStep = () => {
@@ -26,41 +24,6 @@ class SignupProcess extends Component {
             step: step - 1
         });
     }
-    // Handle change inside inputs
-    ///// !!!!!!!!!!!!!!!!!!
-    ///// !!!!!!!!!!!!!!!!!!!!!!!!!!
-    // Might have to adjust formIsValid to be able to continue to next step
-    inputChangedHandler = (event, inputIdentifier) => {
-		const updatedStepOneForm = {
-			...this.state.signUpForm
-		};
-		const updatedFormElement = {
-			...updatedStepOneForm[inputIdentifier]
-		};
-		updatedFormElement.value = event.target.value;
-		updatedFormElement.valid = this.checkValidity(updatedFormElement, updatedFormElement.validation);
-		updatedFormElement.touched = true;
-		updatedStepOneForm[inputIdentifier] = updatedFormElement;
-		let updatedFormIsValid = true;
-		for (let inputIdentifier in updatedStepOneForm) {
-			updatedFormIsValid = updatedStepOneForm[inputIdentifier].valid && updatedFormIsValid;
-		}
-		this.setState({signUpForm: updatedStepOneForm, formIsValid: updatedFormIsValid});
-    } 
-    	// Check user follows rules of each input
-	checkValidity = (value, rules) => {
-		let isValid = true;
-		if (rules.required) {
-			isValid = value.value.trim() !== '' && isValid;
-		}
-		if (rules.minLength) {
-			isValid = (value.value.length >= rules.minLength) && isValid;
-		}
-		if (rules.maxLength) {
-			isValid = (value.value.length <= rules.maxLength) && isValid;
-		}
-		return isValid;
-	}
 
     render() {
         const { step } = this.state;
@@ -69,8 +32,7 @@ class SignupProcess extends Component {
             case 1:
                 return (
                     <  AboutYou
-                        nextStep={this.nextStep}
-                    />
+                        nextStep={this.nextStep}/>
                 )
             case 2:
                 return (
@@ -86,8 +48,9 @@ class SignupProcess extends Component {
                 )
             case 4:
                 return (
-                    // <Services />
-                    <h1>Services</h1>
+                    <Services 
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}/>
                 )
             case 5:
                 return (
@@ -108,5 +71,6 @@ class SignupProcess extends Component {
 
     }
 }
+
 
 export default SignupProcess;

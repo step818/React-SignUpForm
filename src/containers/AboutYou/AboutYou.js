@@ -61,13 +61,17 @@ class AboutYou extends Component {
 				touched: false
 			}
 		},
-		formIsValid: false,
-		continuing: false
+		formIsValid: false
 	}
 	continue = e => {
 		e.preventDefault();
 		this.props.nextStep();
 	}
+	inputChanged = (e, inputIdentifier) => {
+		e.preventDefault();
+		this.props.inputChangedHandler(e, inputIdentifier);
+	}
+
 	//
 	stepOneHandler = (event) => {
 		event.preventDefault();
