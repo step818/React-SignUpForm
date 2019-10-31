@@ -109,6 +109,11 @@ class AboutYourRest extends Component {
 		this.props.prevStep();
 	}
 
+	continue = e => {
+		e.preventDefault();
+		this.props.nextStep();
+	}
+
 	stepTwoHandler = (event) => {
 		event.preventDefault();
 		const formData = {};
@@ -165,7 +170,7 @@ class AboutYourRest extends Component {
 						changed={(event) => this.inputChangedHandler(event, formElement.id)} />
 				))}
 				<Button btnType="Danger" clicked={this.previous}>Back</Button>
-				<Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.nextClicked}>Next</Button>
+				<Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.continue}>Next</Button>
 			</form>
 		);
 
