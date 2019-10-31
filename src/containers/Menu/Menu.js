@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import classes from './Menu.css';
 
 export class Menu extends Component {
   state = {
@@ -57,7 +58,7 @@ export class Menu extends Component {
       </form>
     );
     return (
-      <div>
+      <div className={classes.Menu}>
         <p>Share your menu</p>
         {form}
       </div>
