@@ -131,7 +131,11 @@ class AboutYourRest extends Component {
 	}
 	// 
 	checkValidity = (value, rules) => {
-
+		let isValid = true;
+		if (rules.required) {
+			isValid = value.value.trim() !== '' && isValid;
+		}
+		return isValid;
 	}
 
 	nextClicked = () => {
@@ -165,12 +169,7 @@ class AboutYourRest extends Component {
 
 		return (
 			<Auxillary>
-				<div
-					className={classes.AboutYourRest}
-					style={{
-						transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
-						opacity: this.props.show ? '1' : '0'
-					}}>
+				<div className={classes.AboutYourRest}>
 						<p>Tell us about your restaurant</p>
 						{form}
 				</div>

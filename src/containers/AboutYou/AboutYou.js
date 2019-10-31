@@ -4,14 +4,8 @@ import Auxillary from '../../hoc/Auxillary/Auxillary';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import classes from './AboutYou.css';
-import AboutYourRest from '../AboutYourRest/AboutYourRest';
 
 class AboutYou extends Component {
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state= {...}
-	// }
-	//State for first step
 	state = {
 		personalInfo: {
 			firstName: {
@@ -70,6 +64,10 @@ class AboutYou extends Component {
 		formIsValid: false,
 		continuing: false
 	}
+	continue = e => {
+		e.preventDefault();
+		this.props.nextStep();
+	}
 	//
 	stepOneHandler = (event) => {
 		event.preventDefault();
@@ -113,9 +111,6 @@ class AboutYou extends Component {
 		return isValid;
 	}
 
-	nextClicked = () => {
-		this.setState({continuing: true});
-	}
 	render() {
 		const formElementsArray = [];
 		for (let key in this.state.personalInfo) {
@@ -138,23 +133,16 @@ class AboutYou extends Component {
 						invalid={!formElement.config.valid}
 						changed={(event) => this.inputChangedHandler(event, formElement.id)} />
 				))}
-				<Button btnType="Success" disabled={!this.state.formIsValid}  clicked={this.nextClicked}>Next</Button>
+				<Button btnType="Success" disabled={!this.state.formIsValid}  onClick={this.continue}>Next</Button>
 			</form>
 		);
 
 		return(
 			<Auxillary>
-				<div 
-					className={classes.AboutYou}
-					style={{
-						transform: this.state.continuing ? 'translateY(-100vh)' : 'translateY(0)',
-						opacity: this.state.continuing ? '0' : '1'
-					}}
-					>
-					<p>Tell us about you</p>
+				<div className={classes.AboutYou}>
+					<p>Tell us about your self</p>
 					{form}
 				</div>
-				<AboutYourRest show={this.state.continuing} />
 			</Auxillary>
 		);
 	}

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import classes from './App.css';
-import AboutYou from './containers/AboutYou/AboutYou';
-import AboutYourRest from './'
+import SignupProcess from './containers/SignupProcess/SignupProcess';
 
 class App extends Component {
     state = {
@@ -211,8 +210,7 @@ class App extends Component {
     render() {
         return (
         <div classname={classes.App}>
-            <AboutYou/>
-            {/* <AboutYourRest show={this.state.secondStep} abtRestClosed={this.backClickHandler} /> */}
+            <SignupProcess/>
         </div>
         );
     }
