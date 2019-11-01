@@ -98,6 +98,7 @@ class SignupProcess extends Component {
                         nextStep={this.nextStep}
                         handleChange={this.handleChange}
                         values={values}
+                        personalInfo={this.state.personalInfo}
                         />
                 )
             case 2:

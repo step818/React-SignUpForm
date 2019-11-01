@@ -6,80 +6,10 @@ import Input from '../../components/UI/Input/Input';
 import classes from './AboutYou.css';
 
 class AboutYou extends Component {
-	state = {
-		personalInfo: {
-			firstName: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'First Name'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			lastName: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Last Name'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			emailAddress: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'email',
-					placeholder: 'Email Address'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			phoneNumber: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Phone Number'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			}
-		},
-		formIsValid: false
-	}
 	continue = e => {
 		e.preventDefault();
 		this.props.nextStep();
 	}
-	// inputChanged = (e, inputIdentifier) => {
-	// 	e.preventDefault();
-	// 	this.props.inputChangedHandler(e, inputIdentifier);
-	// }
-
-	//
-	// stepOneHandler = (event) => {
-	// 	event.preventDefault();
-	// 	const formData = {};
-	// 	for (let formElementIdentifier in this.state.personalInfo) {
-	// 		formData[formElementIdentifier] = this.state.personalInfo[formElementIdentifier].value;
-	// 	}
-	// }
 	// Passes props to form page indicating input is being changed and validity should always be checked
 	// inputChangedHandler = (event, inputIdentifier) => {
 	// 	const updatedStepOneForm = {
@@ -117,10 +47,10 @@ class AboutYou extends Component {
 	render() {
 		const { value, handleChange } = this.props;
 		const formElementsArray = [];
-		for (let key in this.state.personalInfo) {
+		for (let key in this.props.personalInfo) {
 			formElementsArray.push({
 				id: key,
-				config: this.state.personalInfo[key]
+				config: this.props.personalInfo[key]
 			});
 		}
 		// (event) => this.inputChangedHandler(event, formElement.id)
@@ -138,7 +68,7 @@ class AboutYou extends Component {
 						invalid={!formElement.config.valid}
 						changed={handleChange(formElement.id)} />
 				))}
-				<Button btnType="Success" disabled={!this.state.formIsValid}  clicked={this.continue}>Next</Button>
+				<Button btnType="Success" disabled={!this.props.formIsValid}  clicked={this.continue}>Next</Button>
 			</form>
 		);
 
