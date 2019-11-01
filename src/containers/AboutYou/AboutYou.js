@@ -67,55 +67,55 @@ class AboutYou extends Component {
 		e.preventDefault();
 		this.props.nextStep();
 	}
-	inputChanged = (e, inputIdentifier) => {
-		e.preventDefault();
-		this.props.inputChangedHandler(e, inputIdentifier);
-	}
+	// inputChanged = (e, inputIdentifier) => {
+	// 	e.preventDefault();
+	// 	this.props.inputChangedHandler(e, inputIdentifier);
+	// }
 
 	//
-	stepOneHandler = (event) => {
-		event.preventDefault();
-		const formData = {};
-		for (let formElementIdentifier in this.state.personalInfo) {
-			formData[formElementIdentifier] = this.state.personalInfo[formElementIdentifier].value;
-		}
-	}
+	// stepOneHandler = (event) => {
+	// 	event.preventDefault();
+	// 	const formData = {};
+	// 	for (let formElementIdentifier in this.state.personalInfo) {
+	// 		formData[formElementIdentifier] = this.state.personalInfo[formElementIdentifier].value;
+	// 	}
+	// }
 	// Passes props to form page indicating input is being changed and validity should always be checked
-	inputChangedHandler = (event, inputIdentifier) => {
-		const updatedStepOneForm = {
-			...this.state.personalInfo
-		};
-		const updatedFormElement = {
-			...updatedStepOneForm[inputIdentifier]
-		};
-		updatedFormElement.value = event.target.value;
-		updatedFormElement.valid = this.checkValidity(updatedFormElement, updatedFormElement.validation);
-		updatedFormElement.touched = true;
-		updatedStepOneForm[inputIdentifier] = updatedFormElement;
-		let updatedFormIsValid = true;
-		for (let inputIdentifier in updatedStepOneForm) {
-			updatedFormIsValid = updatedStepOneForm[inputIdentifier].valid && updatedFormIsValid;
-		}
-		this.setState({personalInfo: updatedStepOneForm, formIsValid: updatedFormIsValid});
-	}
+	// inputChangedHandler = (event, inputIdentifier) => {
+	// 	const updatedStepOneForm = {
+	// 		...this.state.personalInfo
+	// 	};
+	// 	const updatedFormElement = {
+	// 		...updatedStepOneForm[inputIdentifier]
+	// 	};
+	// 	updatedFormElement.value = event.target.value;
+	// 	updatedFormElement.valid = this.checkValidity(updatedFormElement, updatedFormElement.validation);
+	// 	updatedFormElement.touched = true;
+	// 	updatedStepOneForm[inputIdentifier] = updatedFormElement;
+	// 	let updatedFormIsValid = true;
+	// 	for (let inputIdentifier in updatedStepOneForm) {
+	// 		updatedFormIsValid = updatedStepOneForm[inputIdentifier].valid && updatedFormIsValid;
+	// 	}
+	// 	this.setState({personalInfo: updatedStepOneForm, formIsValid: updatedFormIsValid});
+	// }
 
-	// Check user follows rules of each input
-	checkValidity = (value, rules) => {
-		let isValid = true;
-		if (rules.required) {
-			isValid = value.value.trim() !== '' && isValid;
-		}
-		if (rules.minLength) {
-			isValid = (value.value.length >= rules.minLength) && isValid;
-		}
-		if (rules.maxLength) {
-			isValid = (value.value.length <= rules.maxLength) && isValid;
-		}
-
-		return isValid;
-	}
+	// // Check user follows rules of each input
+	// checkValidity = (value, rules) => {
+	// 	let isValid = true;
+	// 	if (rules.required) {
+	// 		isValid = value.value.trim() !== '' && isValid;
+	// 	}
+	// 	if (rules.minLength) {
+	// 		isValid = (value.value.length >= rules.minLength) && isValid;
+	// 	}
+	// 	if (rules.maxLength) {
+	// 		isValid = (value.value.length <= rules.maxLength) && isValid;
+	// 	}
+	// 	return isValid;
+	// }
 
 	render() {
+		const { value, handleChange } = this.props;
 		const formElementsArray = [];
 		for (let key in this.state.personalInfo) {
 			formElementsArray.push({
@@ -123,6 +123,7 @@ class AboutYou extends Component {
 				config: this.state.personalInfo[key]
 			});
 		}
+		// (event) => this.inputChangedHandler(event, formElement.id)
 		let form = (
 			<form onSubmit={this.stepOneHandler}>
 				{formElementsArray.map(formElement => (
@@ -130,12 +131,12 @@ class AboutYou extends Component {
 						valueType={formElement.id}
 						elementType={formElement.config.elementType}
 						elementConfig={formElement.config.elementConfig}
-						value={formElement.config.value}
+						value={value}
 						key={formElement.id}
 						touched={formElement.config.touched}
 						shouldValidate={formElement.config.validation}
 						invalid={!formElement.config.valid}
-						changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+						changed={handleChange(formElement.id)} />
 				))}
 				<Button btnType="Success" disabled={!this.state.formIsValid}  clicked={this.continue}>Next</Button>
 			</form>
