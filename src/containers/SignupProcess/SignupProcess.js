@@ -68,6 +68,8 @@ class SignupProcess extends Component {
 		},
 		formIsValid: false
     }
+    // Assign a variable to state.personalInfo[input]
+    
     //Proceed to next step
     nextStep = () => {
         const { step } = this.state;
@@ -84,8 +86,28 @@ class SignupProcess extends Component {
     }
     handleChange = input => e => {
         console.log(input);
-        this.setState({[input]: e.target.value})
+        console.log(input.id);
+        const value = e.target.value;
+        console.log(value)
+        // input.config.validation is {required: true}
+        console.log(input.config.validation);
+        // this.checkValidity(input, input.validation)
+        this.setState({[input]: value})
     }
+    // Check user follows rules of each input
+	checkValidity = (value, rules) => {
+		let isValid = true;
+		if (rules.required) {
+			isValid = value.value.trim() !== '' && isValid;
+		}
+		if (rules.minLength) {
+			isValid = (value.value.length >= rules.minLength) && isValid;
+		}
+		if (rules.maxLength) {
+			isValid = (value.value.length <= rules.maxLength) && isValid;
+		}
+		return isValid;
+	}
 
     render() {
         const { step } = this.state;
@@ -98,6 +120,7 @@ class SignupProcess extends Component {
                         nextStep={this.nextStep}
                         handleChange={this.handleChange}
                         values={values}
+                        
                         personalInfo={this.state.personalInfo}
                         />
                 )
