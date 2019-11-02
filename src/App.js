@@ -94,7 +94,7 @@ class App extends Component {
 
     render() {
         return (
-        <div classname={classes.App}>
+        <div className={classes.App}>
             <SignupProcess/>
         </div>
         );

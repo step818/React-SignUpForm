@@ -68,7 +68,7 @@ class AboutYou extends Component {
 						touched={formElement.config.touched}
 						shouldValidate={formElement.config.validation}
 						invalid={!formElement.config.valid}
-						changed={handleChange( formElement)} />
+						changed={handleChange(formElement)} />
 				))}
 				<Button btnType="Success" disabled={!this.props.formIsValid}  clicked={this.continue}>Next</Button>
 			</form>

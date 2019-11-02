@@ -84,15 +84,34 @@ class SignupProcess extends Component {
             step: step - 1
         });
     }
-    handleChange = input => e => {
-        console.log(input);
-        console.log(input.id);
+    handleChange = formElement => e => {
+        console.log("formElement: ", formElement);
         const value = e.target.value;
         console.log(value)
-        // input.config.validation is {required: true}
-        console.log(input.config.validation);
-        // this.checkValidity(input, input.validation)
-        this.setState({[input]: value})
+        
+        const updatedForm = {
+            ...this.state.personalInfo
+        };
+        const updatedFormElement = {
+            ...updatedForm[formElement]
+        };
+        updatedFormElement.value = value;
+
+        updatedFormElement.valid = this.checkValidity(updatedFormElement, 
+        formElement.config.validation);
+        console.log("updatedFormElement.valid: ", updatedFormElement.valid);
+        console.log("updatedForm: ", updatedForm);
+        console.log("updatedFormElement: ", updatedFormElement);
+        updatedForm[formElement] = updatedFormElement;
+        console.log("updatedForm[formElement]: ",  updatedForm[formElement]);
+        let updatedFormIsValid = true;
+        for (let formElement in updatedForm) {
+            updatedFormIsValid = updatedForm[formElement].valid && updatedFormIsValid;
+            console.log("updatedForm[formElement].valid: ", updatedForm[formElement].valid);
+        }
+        console.log("updatedFormIsValid: ", updatedFormIsValid);
+
+        this.setState({[formElement]: value, formIsValid: updatedFormIsValid});
     }
     // Check user follows rules of each input
 	checkValidity = (value, rules) => {
@@ -105,7 +124,8 @@ class SignupProcess extends Component {
 		}
 		if (rules.maxLength) {
 			isValid = (value.value.length <= rules.maxLength) && isValid;
-		}
+        }
+        console.log("isValid: ", isValid);
 		return isValid;
 	}
 
