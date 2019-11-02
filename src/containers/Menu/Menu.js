@@ -5,20 +5,6 @@ import Button from '../../components/UI/Button/Button';
 import classes from './Menu.css';
 
 export class Menu extends Component {
-  state = {
-    menuInfo: {
-      elementType: 'select',
-      elementConfig: {
-          options: [
-              {value: 'link', displayValue: 'Link to Menu'},
-              {value: 'file', displayValue: 'PDF, JPEG, or Photo upload'}
-          ]
-      },
-      value: 'link',
-      validation: {},
-      valid: true
-    }
-  }
 
   previous = e => {
 		e.preventDefault();
@@ -31,6 +17,7 @@ export class Menu extends Component {
 	}
 
   render() {
+    const { handleChange } = this.props;
     // Assign each element in the form array an id and config
     const formElementsArray = [];
     for (let key in this.state) {
@@ -51,7 +38,7 @@ export class Menu extends Component {
             touched={formElement.config.touched}
             shouldValidate={formElement.config.validation}
             invalid={!formElement.config.valid}
-            changed={(event) => this.props.inputChangedHandler(event, formElement.id)} />
+            changed={handleChange(formElement)} />
         ))}
         <Button btnType="Danger" clicked={this.previous}>Back</Button>
         <Button btnType="Success" clicked={this.continue}>Next</Button>

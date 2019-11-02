@@ -12,6 +12,7 @@ import Confirm from '../Confirm/Confirm';
 class SignupProcess extends Component {
     state = {
         step: 1,
+        // Maybe make a form: { pInf: , rInfo: , ... } attribute
         personalInfo: {
 			firstName: {
 				elementType: 'input',
@@ -66,98 +67,6 @@ class SignupProcess extends Component {
 				touched: false
             }
         },
-        restaurantName: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Restaurant Name'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			phoneNumber: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Phone Number'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			deliveryHours: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Delivery Hours (ie. Mon 10am - 10pm)'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			street: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Street'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			city: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'City'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			stateProvince: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'State / Province'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			postalCode: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Zip / Postal Code'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-            },
-            formIsValid: false,
         restaurantInfo: {
             restaurantName: {
 				elementType: 'input',
@@ -250,6 +159,18 @@ class SignupProcess extends Component {
 				valid: false,
 				touched: false
 			}
+        },
+        menuInfo: {
+            elementType: 'select',
+            elementConfig: {
+                options: [
+                    {value: 'link', displayValue: 'Link to Menu'},
+                    {value: 'file', displayValue: 'PDF, JPEG, or Photo upload'}
+                ]
+            },
+            value: 'link',
+            validation: {},
+            valid: true
         }
 		
     }
@@ -272,8 +193,12 @@ class SignupProcess extends Component {
     handleChange = formElement => e => {
         console.log("formElement: ", formElement);
         const value = e.target.value;
+        const updatedSignUp = {
+            ...this.state
+        };
+        console.log(updatedSignUp);
         const updatedForm = {
-            ...this.state.personalInfo
+            ...updatedSignUp
         };
         console.log("first updated form: ", updatedForm);
         const updatedFormElement = {
@@ -317,7 +242,8 @@ class SignupProcess extends Component {
         const { step, formIsValid } = this.state;
         const { firstName, lastName, emailAddress, phoneNumber} = this.state.personalInfo;
         const { restaurantName, restaurantPhone, deliveryHours, street, city, stateProvince, postalCode } = this.state.restaurantInfo;
-        const values = { firstName, lastName, emailAddress, phoneNumber, restaurantName, restaurantPhone, deliveryHours, street, city, stateProvince, postalCode}
+        const { link, file } = this.state.menuInfo;
+        const values = { firstName, lastName, emailAddress, phoneNumber, restaurantName, restaurantPhone, deliveryHours, street, city, stateProvince, postalCode, link, file}
         switch(step) {
             case 1:
                 return (
@@ -342,7 +268,11 @@ class SignupProcess extends Component {
                 return (
                     <Menu 
                         nextStep={this.nextStep}
-                        prevStep={this.prevStep}/>
+                        prevStep={this.prevStep}
+                        handleChang={this.handleChange}
+                        values={values}
+                        menuInfo={this.state.menuInfo}
+                        />
                 )
             case 4:
                 return (

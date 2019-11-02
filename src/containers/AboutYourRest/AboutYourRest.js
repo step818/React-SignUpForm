@@ -100,8 +100,7 @@ class AboutYourRest extends Component {
 				touched: false
 			}
 		},
-		formisValid: false,
-		continuing: false
+		formisValid: false
 	}
 	//
 	previous = e => {
@@ -114,46 +113,13 @@ class AboutYourRest extends Component {
 		this.props.nextStep();
 	}
 
-	stepTwoHandler = (event) => {
-		event.preventDefault();
-		const formData = {};
-		for (let formElementIdentifier in this.state.restaurantInfo) {
-			formData[formElementIdentifier] = this.state.restaurantInfo[formElementIdentifier].value;
-		}
-	}
-	// Changes input value as user types inside input
-	inputChangedHandler = (event, inputIdentifier) => {
-		const updatedStepTwoForm = {
-			...this.state.restaurantInfo
-		};
-		const updatedFormElement = {
-			...updatedStepTwoForm[inputIdentifier]
-		};
-		updatedFormElement.value = event.target.value;
-		updatedFormElement.valid = this.checkValidity(updatedFormElement, updatedFormElement.validation);
-		updatedFormElement.touched = true;
-		updatedStepTwoForm[inputIdentifier] = updatedFormElement;
-		let updatedFormIsValid = true;
-		for (let inputIdentifier in updatedStepTwoForm) {
-			updatedFormIsValid = updatedStepTwoForm[inputIdentifier].valid && updatedFormIsValid;
-		}
-		this.setState({restaurantInfo: updatedStepTwoForm, formIsValid: updatedFormIsValid});
-	}
-	// 
-	checkValidity = (value, rules) => {
-		let isValid = true;
-		if (rules.required) {
-			isValid = value.value.trim() !== '' && isValid;
-		}
-		return isValid;
-	}
 	render() {
 		const { value, handleChange, formIsValid } = this.props;
 		const formElementsArray = [];
 		for (let key in this.props.restaurantInfo) {
 			formElementsArray.push({
 				id: key,
-				config: this.state.restaurantInfo[key]
+				config: this.props.restaurantInfo[key]
 			});
 		}
 		let form = (
