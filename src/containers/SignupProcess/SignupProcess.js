@@ -92,21 +92,24 @@ class SignupProcess extends Component {
         const updatedForm = {
             ...this.state.personalInfo
         };
+        console.log("updatedForm: ", updatedForm);
         const updatedFormElement = {
             ...updatedForm[formElement]
         };
+        console.log("updatedFormElement: ", updatedFormElement);
         updatedFormElement.value = value;
 
         updatedFormElement.valid = this.checkValidity(updatedFormElement, 
         formElement.config.validation);
-        console.log("updatedFormElement.valid: ", updatedFormElement.valid);
+
         console.log("updatedForm: ", updatedForm);
         console.log("updatedFormElement: ", updatedFormElement);
         updatedForm[formElement] = updatedFormElement;
         console.log("updatedForm[formElement]: ",  updatedForm[formElement]);
+        console.log(updatedForm[formElement].length);
         let updatedFormIsValid = true;
         for (let formElement in updatedForm) {
-            updatedFormIsValid = updatedForm[formElement].valid && updatedFormIsValid;
+            updatedFormIsValid = updatedFormElement.valid && updatedFormIsValid;
             console.log("updatedForm[formElement].valid: ", updatedForm[formElement].valid);
         }
         console.log("updatedFormIsValid: ", updatedFormIsValid);
@@ -130,7 +133,7 @@ class SignupProcess extends Component {
 	}
 
     render() {
-        const { step } = this.state;
+        const { step, formIsValid } = this.state;
         const { firstName, lastName, emailAddress, phoneNumber} = this.state.personalInfo;
         const values = { firstName, lastName, emailAddress, phoneNumber}
         switch(step) {
@@ -140,7 +143,7 @@ class SignupProcess extends Component {
                         nextStep={this.nextStep}
                         handleChange={this.handleChange}
                         values={values}
-                        
+                        formIsValid={formIsValid}
                         personalInfo={this.state.personalInfo}
                         />
                 )

@@ -46,7 +46,8 @@ class AboutYou extends Component {
 
 	render() {
 		// pass arguments as props
-		const { value, handleChange } = this.props;
+		const { value, handleChange, formIsValid } = this.props;
+		console.log("formIsValid: ", formIsValid);
 		// map props to a form
 		const formElementsArray = [];
 		for (let key in this.props.personalInfo) {
@@ -67,7 +68,7 @@ class AboutYou extends Component {
 						key={formElement.id}
 						touched={formElement.config.touched}
 						shouldValidate={formElement.config.validation}
-						invalid={!formElement.config.valid}
+						invalid={!formIsValid}
 						changed={handleChange(formElement)} />
 				))}
 				<Button btnType="Success" disabled={!this.props.formIsValid}  clicked={this.continue}>Next</Button>
