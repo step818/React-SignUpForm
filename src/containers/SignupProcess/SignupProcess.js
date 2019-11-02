@@ -64,9 +64,194 @@ class SignupProcess extends Component {
 				},
 				valid: false,
 				touched: false
+            }
+        },
+        restaurantName: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Restaurant Name'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			phoneNumber: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Phone Number'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			deliveryHours: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Delivery Hours (ie. Mon 10am - 10pm)'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			street: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Street'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			city: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'City'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			stateProvince: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'State / Province'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			postalCode: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Zip / Postal Code'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+            },
+            formIsValid: false,
+        restaurantInfo: {
+            restaurantName: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Restaurant Name'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			restaurantPhone: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Phone Number'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			deliveryHours: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Delivery Hours (ie. Mon 10am - 10pm)'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			street: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Street'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			city: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'City'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			stateProvince: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'State / Province'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			postalCode: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Zip / Postal Code'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
 			}
-		},
-		formIsValid: false
+        }
+		
     }
     // Assign a variable to state.personalInfo[input]
     
@@ -87,30 +272,26 @@ class SignupProcess extends Component {
     handleChange = formElement => e => {
         console.log("formElement: ", formElement);
         const value = e.target.value;
-        console.log(value)
-        
         const updatedForm = {
             ...this.state.personalInfo
         };
-        console.log("updatedForm: ", updatedForm);
+        console.log("first updated form: ", updatedForm);
         const updatedFormElement = {
             ...updatedForm[formElement]
         };
-        console.log("updatedFormElement: ", updatedFormElement);
+        console.log("first update form element: ", updatedFormElement);
         updatedFormElement.value = value;
-
         updatedFormElement.valid = this.checkValidity(updatedFormElement, 
         formElement.config.validation);
-
         console.log("updatedForm: ", updatedForm);
         console.log("updatedFormElement: ", updatedFormElement);
         updatedForm[formElement] = updatedFormElement;
         console.log("updatedForm[formElement]: ",  updatedForm[formElement]);
-        console.log(updatedForm[formElement].length);
         let updatedFormIsValid = true;
         for (let formElement in updatedForm) {
-            updatedFormIsValid = updatedFormElement.valid && updatedFormIsValid;
-            console.log("updatedForm[formElement].valid: ", updatedForm[formElement].valid);
+            console.log("vld: ",formElement);
+            updatedFormIsValid = updatedForm[updatedFormElement].valid && updatedFormIsValid;
+            console.log("updatedForm[updatedFormElement].valid: ", updatedForm[updatedFormElement].valid);
         }
         console.log("updatedFormIsValid: ", updatedFormIsValid);
 
@@ -135,7 +316,8 @@ class SignupProcess extends Component {
     render() {
         const { step, formIsValid } = this.state;
         const { firstName, lastName, emailAddress, phoneNumber} = this.state.personalInfo;
-        const values = { firstName, lastName, emailAddress, phoneNumber}
+        const { restaurantName, restaurantPhone, deliveryHours, street, city, stateProvince, postalCode } = this.state.restaurantInfo;
+        const values = { firstName, lastName, emailAddress, phoneNumber, restaurantName, restaurantPhone, deliveryHours, street, city, stateProvince, postalCode}
         switch(step) {
             case 1:
                 return (
@@ -151,7 +333,10 @@ class SignupProcess extends Component {
                 return (
                     <AboutYourRest
                         nextStep={this.nextStep}
-                        prevStep={this.prevStep}/>
+                        prevStep={this.prevStep}
+                        handleChange={this.handleChange}
+                        values={values}
+                        restaurantInfo={this.state.restaurantInfo}/>
                 )
             case 3:
                 return (

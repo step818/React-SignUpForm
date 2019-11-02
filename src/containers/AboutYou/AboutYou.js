@@ -10,40 +10,6 @@ class AboutYou extends Component {
 		e.preventDefault();
 		this.props.nextStep();
 	}
-	// Passes props to form page indicating input is being changed and validity should always be checked
-	// inputChangedHandler = (event, inputIdentifier) => {
-	// 	const updatedStepOneForm = {
-	// 		...this.state.personalInfo
-	// 	};
-	// 	const updatedFormElement = {
-	// 		...updatedStepOneForm[inputIdentifier]
-	// 	};
-	// 	updatedFormElement.value = event.target.value;
-	// 	updatedFormElement.valid = this.checkValidity(updatedFormElement, updatedFormElement.validation);
-	// 	updatedFormElement.touched = true;
-	// 	updatedStepOneForm[inputIdentifier] = updatedFormElement;
-	// 	let updatedFormIsValid = true;
-	// 	for (let inputIdentifier in updatedStepOneForm) {
-	// 		updatedFormIsValid = updatedStepOneForm[inputIdentifier].valid && updatedFormIsValid;
-	// 	}
-	// 	this.setState({personalInfo: updatedStepOneForm, formIsValid: updatedFormIsValid});
-	// }
-
-	// // Check user follows rules of each input
-	// checkValidity = (value, rules) => {
-	// 	let isValid = true;
-	// 	if (rules.required) {
-	// 		isValid = value.value.trim() !== '' && isValid;
-	// 	}
-	// 	if (rules.minLength) {
-	// 		isValid = (value.value.length >= rules.minLength) && isValid;
-	// 	}
-	// 	if (rules.maxLength) {
-	// 		isValid = (value.value.length <= rules.maxLength) && isValid;
-	// 	}
-	// 	return isValid;
-	// }
-
 	render() {
 		// pass arguments as props
 		const { value, handleChange, formIsValid } = this.props;

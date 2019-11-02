@@ -148,8 +148,9 @@ class AboutYourRest extends Component {
 		return isValid;
 	}
 	render() {
+		const { value, handleChange, formIsValid } = this.props;
 		const formElementsArray = [];
-		for (let key in this.state.restaurantInfo) {
+		for (let key in this.props.restaurantInfo) {
 			formElementsArray.push({
 				id: key,
 				config: this.state.restaurantInfo[key]
@@ -162,12 +163,12 @@ class AboutYourRest extends Component {
 						valueType={formElement.id}
 						elementType={formElement.config.elementType}
 						elementConfig={formElement.config.elementConfig}
-						value={formElement.config.value}
+						value={value}
 						key={formElement.id}
 						touched={formElement.config.touched}
 						shouldValidate={formElement.config.validation}
-						invalid={!formElement.config.valid}
-						changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+						invalid={!formIsValid}
+						changed={handleChange(formElement)} />
 				))}
 				<Button btnType="Danger" clicked={this.previous}>Back</Button>
 				<Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.continue}>Next</Button>
