@@ -194,7 +194,7 @@ class SignupProcess extends Component {
         console.log("formElement: ", formElement);
         const value = e.target.value;
         const updatedSignUp = {
-            ...this.state
+            ...this.state[formElement]
         };
         console.log(updatedSignUp);
         const updatedForm = {

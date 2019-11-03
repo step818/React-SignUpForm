@@ -12,17 +12,20 @@ class AboutYou extends Component {
 	}
 	render() {
 		// pass arguments as props
-		const { value, handleChange, formIsValid } = this.props;
+		const { value, handleChange, formIsValid, personalInfo } = this.props;
 		console.log("formIsValid: ", formIsValid);
 		// map props to a form
 		const formElementsArray = [];
-		for (let key in this.props.personalInfo) {
+		// for each array within personalInfo array
+		// push an id and tag element(config) to be able to access other info
+		for (let key in personalInfo) {
 			formElementsArray.push({
 				id: key,
-				config: this.props.personalInfo[key]
+				config: personalInfo[key]
 			});
+			console.log("formElementsArray: ", formElementsArray);
 		}
-		// (event) => this.inputChangedHandler(event, formElement.id)
+		// 
 		let form = (
 			<form onSubmit={this.stepOneHandler}>
 				{formElementsArray.map(formElement => (
@@ -30,7 +33,7 @@ class AboutYou extends Component {
 						valueType={formElement.id}
 						elementType={formElement.config.elementType}
 						elementConfig={formElement.config.elementConfig}
-						value={value}
+						value={formElement.config.value}
 						key={formElement.id}
 						touched={formElement.config.touched}
 						shouldValidate={formElement.config.validation}
