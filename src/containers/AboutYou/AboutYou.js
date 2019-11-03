@@ -30,14 +30,13 @@ class AboutYou extends Component {
 			<form onSubmit={this.stepOneHandler}>
 				{formElementsArray.map(formElement => (
 					<Input
-						valueType={formElement.id}
 						elementType={formElement.config.elementType}
 						elementConfig={formElement.config.elementConfig}
 						value={formElement.config.value}
 						key={formElement.id}
 						touched={formElement.config.touched}
 						shouldValidate={formElement.config.validation}
-						invalid={!formIsValid}
+						invalid={!formElement.config.valid}
 						changed={handleChange(formElement)} />
 				))}
 				<Button btnType="Success" disabled={!this.props.formIsValid}  clicked={this.continue}>Next</Button>

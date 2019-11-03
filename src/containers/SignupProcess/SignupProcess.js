@@ -11,168 +11,170 @@ import Confirm from '../Confirm/Confirm';
 
 class SignupProcess extends Component {
     state = {
-        step: 1,
+				step: 1,
+				signUp: {
+					personalInfo: {
+						firstName: {
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'First Name'
+							},
+							value: '',
+							validation: {
+								required: true
+							},
+							valid: false,
+							touched: false
+						},
+						lastName: {
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Last Name'
+							},
+							value: '',
+							validation: {
+								required: true
+							},
+							valid: false,
+							touched: false
+						},
+						emailAddress: {
+							elementType: 'input',
+							elementConfig: {
+								type: 'email',
+								placeholder: 'Email Address'
+							},
+							value: '',
+							validation: {
+								required: true
+							},
+							valid: false,
+							touched: false
+						},
+						phoneNumber: {
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Phone Number'
+							},
+							value: '',
+							validation: {
+								required: true
+							},
+							valid: false,
+							touched: false
+									}
+							},
+							restaurantInfo: {
+									restaurantName: {
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Restaurant Name'
+							},
+							value: '',
+							validation: {
+								required: true
+							},
+							valid: false,
+							touched: false
+						},
+						restaurantPhone: {
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Phone Number'
+							},
+							value: '',
+							validation: {
+								required: true
+							},
+							valid: false,
+							touched: false
+						},
+						deliveryHours: {
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Delivery Hours (ie. Mon 10am - 10pm)'
+							},
+							value: '',
+							validation: {
+								required: true
+							},
+							valid: false,
+							touched: false
+						},
+						street: {
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Street'
+							},
+							value: '',
+							validation: {
+								required: true
+							},
+							valid: false,
+							touched: false
+						},
+						city: {
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'City'
+							},
+							value: '',
+							validation: {
+								required: true
+							},
+							valid: false,
+							touched: false
+						},
+						stateProvince: {
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'State / Province'
+							},
+							value: '',
+							validation: {
+								required: true
+							},
+							valid: false,
+							touched: false
+						},
+						postalCode: {
+							elementType: 'input',
+							elementConfig: {
+								type: 'text',
+								placeholder: 'Zip / Postal Code'
+							},
+							value: '',
+							validation: {
+								required: true
+							},
+							valid: false,
+							touched: false
+						}
+							},
+							menuInfo: {
+									elementType: 'select',
+									elementConfig: {
+											options: [
+													{value: 'link', displayValue: 'Link to Menu'},
+													{value: 'file', displayValue: 'PDF, JPEG, or Photo upload'}
+											]
+									},
+									value: 'link',
+									validation: {},
+									valid: true
+							}
+					
+				}
         // Maybe make a form: { pInf: , rInfo: , ... } attribute
-        personalInfo: {
-			firstName: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'First Name'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			lastName: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Last Name'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			emailAddress: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'email',
-					placeholder: 'Email Address'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			phoneNumber: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Phone Number'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-            }
-        },
-        restaurantInfo: {
-            restaurantName: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Restaurant Name'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			restaurantPhone: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Phone Number'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			deliveryHours: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Delivery Hours (ie. Mon 10am - 10pm)'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			street: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Street'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			city: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'City'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			stateProvince: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'State / Province'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			},
-			postalCode: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'text',
-					placeholder: 'Zip / Postal Code'
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				valid: false,
-				touched: false
-			}
-        },
-        menuInfo: {
-            elementType: 'select',
-            elementConfig: {
-                options: [
-                    {value: 'link', displayValue: 'Link to Menu'},
-                    {value: 'file', displayValue: 'PDF, JPEG, or Photo upload'}
-                ]
-            },
-            value: 'link',
-            validation: {},
-            valid: true
-        }
-		
     }
     // Assign a variable to state.personalInfo[input]
     
@@ -189,16 +191,27 @@ class SignupProcess extends Component {
         this.setState({
             step: step - 1
         });
-    }
+		}
+		handleForm = () => {
+
+		}
     handleChange = formElement => e => {
-        console.log("formElement: ", formElement);
+				console.log("formElement: ", formElement);
         const value = e.target.value;
         const updatedSignUp = {
-            ...this.state[formElement]
-        };
-        console.log(updatedSignUp);
+            ...this.state.signUp
+				};
+				// make an array of the names of the steps.
+				// i.e. {id: personalInfo, id: restaurantInfo, id: menu, ... }
+				const categories = [];
+				for (let key in updatedSignUp) {
+					categories.push({
+						id: key
+					});
+					console.log("categories: ", categories);
+				}
         const updatedForm = {
-            ...updatedSignUp
+            ...updatedSignUp.category
         };
         console.log("first updated form: ", updatedForm);
         const updatedFormElement = {
@@ -220,7 +233,7 @@ class SignupProcess extends Component {
         }
         console.log("updatedFormIsValid: ", updatedFormIsValid);
 
-        this.setState({[formElement]: value, formIsValid: updatedFormIsValid});
+        this.setState({[formElement] : value, formIsValid: updatedFormIsValid});
     }
     // Check user follows rules of each input
 	checkValidity = (value, rules) => {
@@ -240,9 +253,9 @@ class SignupProcess extends Component {
 
     render() {
         const { step, formIsValid } = this.state;
-        const { firstName, lastName, emailAddress, phoneNumber} = this.state.personalInfo;
-        const { restaurantName, restaurantPhone, deliveryHours, street, city, stateProvince, postalCode } = this.state.restaurantInfo;
-        const { link, file } = this.state.menuInfo;
+        const { firstName, lastName, emailAddress, phoneNumber} = this.state.signUp.personalInfo;
+        const { restaurantName, restaurantPhone, deliveryHours, street, city, stateProvince, postalCode } = this.state.signUp.restaurantInfo;
+        const { link, file } = this.state.signUp.menuInfo;
         const values = { firstName, lastName, emailAddress, phoneNumber, restaurantName, restaurantPhone, deliveryHours, street, city, stateProvince, postalCode, link, file}
         switch(step) {
             case 1:
@@ -252,7 +265,7 @@ class SignupProcess extends Component {
                         handleChange={this.handleChange}
                         values={values}
                         formIsValid={formIsValid}
-                        personalInfo={this.state.personalInfo}
+												personalInfo={this.state.signUp.personalInfo}
                         />
                 )
             case 2:
@@ -262,7 +275,8 @@ class SignupProcess extends Component {
                         prevStep={this.prevStep}
                         handleChange={this.handleChange}
                         values={values}
-                        restaurantInfo={this.state.restaurantInfo}/>
+                        restaurantInfo={this.state.restaurantInfo}
+												category={this.state.restaurantInfo}/>
                 )
             case 3:
                 return (
