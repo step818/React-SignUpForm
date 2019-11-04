@@ -13,60 +13,7 @@ class SignupProcess extends Component {
     state = {
 				step: 1,
 				signUp: {
-					personalInfo: {
-						firstName: {
-							elementType: 'input',
-							elementConfig: {
-								type: 'text',
-								placeholder: 'First Name'
-							},
-							value: '',
-							validation: {
-								required: true
-							},
-							valid: false,
-							touched: false
-						},
-						lastName: {
-							elementType: 'input',
-							elementConfig: {
-								type: 'text',
-								placeholder: 'Last Name'
-							},
-							value: '',
-							validation: {
-								required: true
-							},
-							valid: false,
-							touched: false
-						},
-						emailAddress: {
-							elementType: 'input',
-							elementConfig: {
-								type: 'email',
-								placeholder: 'Email Address'
-							},
-							value: '',
-							validation: {
-								required: true
-							},
-							valid: false,
-							touched: false
-						},
-						phoneNumber: {
-							elementType: 'input',
-							elementConfig: {
-								type: 'text',
-								placeholder: 'Phone Number'
-							},
-							value: '',
-							validation: {
-								required: true
-							},
-							valid: false,
-							touched: false
-									}
-							},
+					,
 							restaurantInfo: {
 									restaurantName: {
 							elementType: 'input',
@@ -211,23 +158,18 @@ class SignupProcess extends Component {
 				// to only reset that category's state
 				let category = categories[this.state.step -1];
 				console.log("category!!!!: ", category);
-				let a = {
-					...updatedSignUp.personalInfo}
+
         let updatedForm = {
             ...updatedSignUp[category]
         };
-        console.log("first updated form: ", updatedForm);
+        console.log("please work: updatedForm: ", updatedForm);
         const updatedFormElement = {
             ...updatedForm[formElement]
         };
-        console.log("first update form element: ", updatedFormElement);
         updatedFormElement.value = value;
         updatedFormElement.valid = this.checkValidity(updatedFormElement, 
         formElement.config.validation);
-        console.log("updatedForm: ", updatedForm);
-        console.log("updatedFormElement: ", updatedFormElement);
         updatedForm[formElement] = updatedFormElement;
-        console.log("updatedForm[formElement]: ",  updatedForm[formElement]);
         let updatedFormIsValid = true;
         for (let formElement in updatedForm) {
             console.log("vld: ",formElement);

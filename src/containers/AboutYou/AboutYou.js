@@ -6,6 +6,61 @@ import Input from '../../components/UI/Input/Input';
 import classes from './AboutYou.css';
 
 class AboutYou extends Component {
+	state = {
+		firstName: {
+			elementType: 'input',
+			elementConfig: {
+				type: 'text',
+				placeholder: 'First Name'
+			},
+			value: '',
+			validation: {
+				required: true
+			},
+			valid: false,
+			touched: false
+		},
+		lastName: {
+			elementType: 'input',
+			elementConfig: {
+				type: 'text',
+				placeholder: 'Last Name'
+			},
+			value: '',
+			validation: {
+				required: true
+			},
+			valid: false,
+			touched: false
+		},
+		emailAddress: {
+			elementType: 'input',
+			elementConfig: {
+				type: 'email',
+				placeholder: 'Email Address'
+			},
+			value: '',
+			validation: {
+				required: true
+			},
+			valid: false,
+			touched: false
+		},
+		phoneNumber: {
+			elementType: 'input',
+			elementConfig: {
+				type: 'text',
+				placeholder: 'Phone Number'
+			},
+			value: '',
+			validation: {
+				required: true
+			},
+			valid: false,
+			touched: false
+		}
+	}
+
 	continue = e => {
 		e.preventDefault();
 		this.props.nextStep();
