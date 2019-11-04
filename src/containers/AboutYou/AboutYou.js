@@ -12,8 +12,7 @@ class AboutYou extends Component {
 	}
 	render() {
 		// pass arguments as props
-		const { value, handleChange, formIsValid, personalInfo } = this.props;
-		console.log("formIsValid: ", formIsValid);
+		const { value, handleChange, personalInfo } = this.props;
 		// map props to a form
 		const formElementsArray = [];
 		// for each array within personalInfo array

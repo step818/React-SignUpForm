@@ -192,9 +192,6 @@ class SignupProcess extends Component {
             step: step - 1
         });
 		}
-		handleForm = () => {
-
-		}
     handleChange = formElement => e => {
 				console.log("formElement: ", formElement);
         const value = e.target.value;
@@ -210,8 +207,14 @@ class SignupProcess extends Component {
 					});
 					console.log("categories: ", categories);
 				}
-        const updatedForm = {
-            ...updatedSignUp.category
+				// let category be the name of each step to be able
+				// to only reset that category's state
+				let category = categories[this.state.step -1];
+				console.log("category!!!!: ", category);
+				let a = {
+					...updatedSignUp.personalInfo}
+        let updatedForm = {
+            ...updatedSignUp[category]
         };
         console.log("first updated form: ", updatedForm);
         const updatedFormElement = {
@@ -231,7 +234,6 @@ class SignupProcess extends Component {
             updatedFormIsValid = updatedForm[updatedFormElement].valid && updatedFormIsValid;
             console.log("updatedForm[updatedFormElement].valid: ", updatedForm[updatedFormElement].valid);
         }
-        console.log("updatedFormIsValid: ", updatedFormIsValid);
 
         this.setState({[formElement] : value, formIsValid: updatedFormIsValid});
     }
@@ -247,7 +249,6 @@ class SignupProcess extends Component {
 		if (rules.maxLength) {
 			isValid = (value.value.length <= rules.maxLength) && isValid;
         }
-        console.log("isValid: ", isValid);
 		return isValid;
 	}
 
