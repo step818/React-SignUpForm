@@ -5,8 +5,44 @@ import Button from '../../components/UI/Button/Button';
 import classes from './Menu.css';
 
 export class Menu extends Component {
+	state = {
+		stepThreeForm: {
+			elementType: 'select',
+									elementConfig: {
+											options: [
+													{value: 'link', displayValue: 'Link to Menu'},
+													{value: 'file', displayValue: 'PDF, JPEG, or Photo upload'}
+											]
+									},
+									value: 'link',
+									validation: {},
+									valid: true
+		}
+	}
 
-  previous = e => {
+	handleChange = (e, formElement) => {
+		console.log("formElement: ", formElement);
+		const updatedStepThreeForm = {
+			...this.state.stepThreeForm
+		};
+		const updatedFormElement = {
+			...updatedStepThreeForm[formElement]
+		};
+		// 
+		updatedFormElement.value = e.target.value;
+		// updatedFormElement.valid = this.checkValidity(updatedFormElement, 
+		// formElement.config.validation);
+		updatedFormElement.touched = true;
+		updatedStepThreeForm[formElement] = updatedFormElement;
+		// check to see if the step is valid
+		// let updatedFormIsValid = true;
+		// for (let formElement in updatedStepThreeForm) {
+		// 	updatedFormIsValid = updatedStepThreeForm[formElement].valid && updatedFormIsValid;
+		// }
+		this.setState({stepThreeForm: updatedStepThreeForm});
+	}
+
+	previous = e => {
 		e.preventDefault();
 		this.props.prevStep();
 	}
@@ -16,41 +52,40 @@ export class Menu extends Component {
 		this.props.nextStep();
 	}
 
-  render() {
-    const { handleChange } = this.props;
-    // Assign each element in the form array an id and config
-    const formElementsArray = [];
-    for (let key in this.state) {
-      formElementsArray.push({
-        id: key,
-        config: this.state[key]
-      });
-    }
-    let form = (
-      <form>
-        {formElementsArray.map(formElement => (
-          <Input
-            valueType={formElement.id}
-            elementType={formElement.config.elementType}
-            elementConfig={formElement.config.elementConfig}
-            value={formElement.config.value}
-            key={formElement.id}
-            touched={formElement.config.touched}
-            shouldValidate={formElement.config.validation}
-            invalid={!formElement.config.valid}
-            changed={handleChange(formElement)} />
-        ))}
-        <Button btnType="Danger" clicked={this.previous}>Back</Button>
-        <Button btnType="Success" clicked={this.continue}>Next</Button>
-      </form>
-    );
-    return (
-      <div className={classes.Menu}>
-        <p>Share your menu</p>
-        {form}
-      </div>
-    )
-  }
+	render() {
+		// Assign each element in the form array an id and config
+		const formElementsArray = [];
+		for (let key in this.state.stepThreeForm) {
+			formElementsArray.push({
+				id: key,
+				config: this.state.stepThreeForm[key]
+			});
+		}
+		let form = (
+			<form onSubmit={this.stepThreeHandler}>
+				{formElementsArray.map(formElement => (
+					<Input
+						valueType={formElement.id}
+						elementType={formElement.config.elementType}
+						elementConfig={formElement.config.elementConfig}
+						value={formElement.config.value}
+						key={formElement.id}
+						touched={formElement.config.touched}
+						shouldValidate={formElement.config.validation}
+						invalid={!formElement.config.valid}
+						changed={(e) => this.handleChange(e, formElement.id)} />
+				))}
+				<Button btnType="Danger" clicked={this.previous}>Back</Button>
+				<Button btnType="Success" clicked={this.continue}>Next</Button>
+			</form>
+		);
+		return (
+			<div className={classes.Menu}>
+				<p>Share your menu</p>
+				{form}
+			</div>
+		)
+	}
 }
 
 export default Menu;

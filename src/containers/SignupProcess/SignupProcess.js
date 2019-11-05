@@ -8,29 +8,30 @@ import Services from '../Services/Services';
 import Photos from '../Photos/Photos';
 import Checkout from '../Checkout/Checkout';
 import Confirm from '../Confirm/Confirm';
+import Success from '../Success/Success';
 
 class SignupProcess extends Component {
-    state = {
+		state = {
 				step: 1
-				}
-        // Maybe make a form: { pInf: , rInfo: , ... } attribute
-    
-    //Proceed to next step
-    nextStep = () => {
-        const { step } = this.state;
-        this.setState({
-            step: step + 1
-        });
-    }
-    // Go back to prev step
-    prevStep = () => {
-        const { step } = this.state;
-        this.setState({
-            step: step - 1
-        });
+				// Maybe make a form: { pInf: , rInfo: , ... } attribute
 		}
-    
-    // Check user follows rules of each input
+		
+		//Proceed to next step
+		nextStep = () => {
+				const { step } = this.state;
+				this.setState({
+						step: step + 1
+				});
+		}
+		// Go back to prev step
+		prevStep = () => {
+				const { step } = this.state;
+				this.setState({
+						step: step - 1
+				});
+		}
+		
+		// Check user follows rules of each input
 	checkValidity = (value, rules) => {
 		let isValid = true;
 		if (rules.required) {
@@ -41,60 +42,64 @@ class SignupProcess extends Component {
 		}
 		if (rules.maxLength) {
 			isValid = (value.value.length <= rules.maxLength) && isValid;
-        }
+				}
 		return isValid;
 	}
 
-    render() {
-        const { step } = this.state;
+		render() {
+				const { step } = this.state;
 			
-        switch(step) {
-            case 1:
-                return (
-                    <AboutYou
-                        nextStep={this.nextStep}
-                        />
-                )
-            case 2:
-                return (
-                    <AboutYourRest
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}
+				switch(step) {
+						case 1:
+								return (
+										<AboutYou
+												nextStep={this.nextStep}
 												/>
-                )
-            case 3:
-                return (
-                    <Menu 
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}
-                        />
-                )
-            case 4:
-                return (
-                    <Services 
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}/>
-                )
-            case 5:
-                return (
-                    <Photos 
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}/>
-                )
-            case 6:
-                return (
-                    <Checkout 
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}/>
-                )
-            case 7:
-                return (
-                    <Confirm 
-                        prevStep={this.prevStep}/>
-                )
-        }
-
-    }
+								)
+						case 2:
+								return (
+										<AboutYourRest
+												nextStep={this.nextStep}
+												prevStep={this.prevStep}
+												/>
+								)
+						case 3:
+								return (
+										<Menu 
+												nextStep={this.nextStep}
+												prevStep={this.prevStep}
+												/>
+								)
+						case 4:
+								return (
+										<Services 
+												nextStep={this.nextStep}
+												prevStep={this.prevStep}/>
+								)
+						case 5:
+								return (
+										<Photos 
+												nextStep={this.nextStep}
+												prevStep={this.prevStep}/>
+								)
+						case 6:
+								return (
+										<Checkout 
+												nextStep={this.nextStep}
+												prevStep={this.prevStep}/>
+								)
+						case 7:
+								return (
+										<Confirm
+												nextStep={this.nextStep}
+												prevStep={this.prevStep}/>
+								)
+						case 8:
+								return (
+									<Success/>			
+								)
+				}
+		}
 }
 
 export default SignupProcess;

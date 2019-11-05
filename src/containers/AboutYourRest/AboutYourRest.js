@@ -156,16 +156,16 @@ class AboutYourRest extends Component {
 						invalid={!formElement.config.valid}
 						changed={(e) => this.handleChange(e, formElement.id)}/>
 				))}
+				{/* disabled={!this.state.formIsValid} */}
 				<Button btnType="Danger" clicked={this.previous}>Back</Button>
-				<Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.continue}>Next</Button>
+				<Button btnType="Success"  clicked={this.continue}>Next</Button>
 			</form>
 		);
-
 		return (
 			<Auxillary>
 				<div className={classes.AboutYourRest}>
-						<p>Tell us about your restaurant</p>
-						{form}
+					<p>Tell us about your restaurant</p>
+					{form}
 				</div>
 			</Auxillary>
 		);

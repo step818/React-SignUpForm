@@ -3,29 +3,138 @@ import React, { Component } from 'react';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import classes from './Checkout.css';
+import Auxillary from '../../hoc/Auxillary/Auxillary';
 
 export class Checkout extends Component {
-  state = {
+	state = {
+		stepSixForm: {
+			legalName: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Legal/Business Name'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			einNumber: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'EIN Number(GST/HST Number for Canada)'
+				},
+				value: '',
+				validation: {
+					required: true,
+					minLength: 9,
+					maxLength: 9
+				},
+				valid: false,
+				touched: false
+			},
+			routingNumber: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Routing Number(Transit Number)'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			accountNumber: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Account Number'
+				},
+				value: '',
+				validation: {
+					required: true,
+					minLength: 10,
+					maxLength: 12
+				},
+				valid: false,
+				touched: false
+			}
+		}
+	}
 
-  }
+	handleChange = (e, formElement) => {
+		console.log("formElement: ", formElement);
+		const updatedStepSixForm = {
+			...this.state.stepSixForm
+		};
+		const updatedFormElement = {
+			...updatedStepSixForm[formElement]
+		};
+		// 
+		updatedFormElement.value = e.target.value;
+		// updatedFormElement.valid = this.checkValidity(updatedFormElement, 
+		// formElement.config.validation);
+		updatedFormElement.touched = true;
+		updatedStepSixForm[formElement] = updatedFormElement;
+		// check to see if the step is valid
+		// let updatedFormIsValid = true;
+		// for (let formElement in updatedStepSixForm) {
+		// 	updatedFormIsValid = updatedStepSixForm[formElement].valid && updatedFormIsValid;
+		// }
+		this.setState({stepSixForm: updatedStepSixForm});
+	}
+	
+	previous = e => {
+		e.preventDefault();
+		this.props.prevStep();
+	}
 
-  previous = e => {
-    e.preventDefault();
-    this.props.prevStep();
-  }
+	continue = e => {
+		e.preventDefault();
+		this.props.nextStep();
+	}
 
-  continue = e => {
-    e.preventDefault();
-    this.props.nextStep();
-  }
-
-  render() {
-    return (
-      <div className={classes.Checkout}>
-        <p>Getting paid</p>
-      </div>
-    )
-  }
+	render() {
+		const formElementsArray = [];
+		for (let key in this.state.stepSixForm) {
+			formElementsArray.push({
+				id: key,
+				config: this.state.stepSixForm[key]
+			});
+		}
+		let form = (
+			<form onSubmit={this.stepSixHandler}>
+				{formElementsArray.map(formElement => (
+					<Input
+						valueType={formElement.id}
+						elementType={formElement.config.elementType}
+						elementConfig={formElement.config.elementConfig}
+						value={formElement.config.value}
+						key={formElement.id}
+						touched={formElement.config.touched}
+						shouldValidate={formElement.config.validation}
+						invalid={!formElement.config.valid}
+						changed={(e) => this.handleChange(e, formElement.id)}/>
+				))}
+				{/* disabled={!this.state.formIsValid} */}
+				<Button btnType="Danger" clicked={this.previous}>Back</Button>
+				<Button btnType="Success"  clicked={this.continue}>Next</Button>
+			</form>
+		);
+		return (
+			<Auxillary>
+				<div className={classes.Checkout}>
+					<p>Getting paid</p>
+					{form}
+				</div>
+			</Auxillary>
+		);
+	}
 }
 
 export default Checkout;
