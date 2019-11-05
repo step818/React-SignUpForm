@@ -15,7 +15,6 @@ class SignupProcess extends Component {
 				step: 1
 				// Maybe make a form: { pInf: , rInfo: , ... } attribute
 		}
-		
 		//Proceed to next step
 		nextStep = () => {
 				const { step } = this.state;

@@ -6,14 +6,20 @@ import classes from './Services.css';
 
 export class Services extends Component {
 	state = {
-		serviceMethods: {
-			elementType: 'select',
-			elementConfig: {
-					options: [
-							{value: 'dineIn'},
-							{value: 'takeOut'},
-							{value: 'dineInAndTakeOut'}
-					]
+		stepFourForm: {
+			serviceMethods: {
+				elementType: 'select',
+				elementConfig: {
+						options: [
+								{value: 'dineIn', displayValue: 'Dine In'},
+								{value: 'takeOut', displayValue: 'Take Out'},
+								{value: 'dineInAndTakeOut', displayValue: 'Both'}
+						]
+				},
+				touched: false,
+				value: 'dineInAndTakeOut',
+				validation: {},
+				valid: true
 			}
 		}
 	}
@@ -53,10 +59,10 @@ export class Services extends Component {
 	render() {
 		// Assign each element in the form array an id and config
 		const formElementsArray = [];
-		for (let key in this.state) {
+		for (let key in this.state.stepFourForm) {
 			formElementsArray.push({
 				id: key,
-				config: this.state[key]
+				config: this.state.stepFourForm[key]
 			});
 		}
 		let form = (

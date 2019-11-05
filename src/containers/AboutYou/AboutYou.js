@@ -122,10 +122,10 @@ class AboutYou extends Component {
 						touched={formElement.config.touched}
 						shouldValidate={formElement.config.validation}
 						invalid={!formElement.config.valid}
-						changed={(e) => this.handleChange(e,formElement.id)} />
+						changed={(e) => this.handleChange(e, formElement.id)} />
 				))}
 				{/* disabled={!this.state.formIsValid} */}
-				<Button btnType="Success"   clicked={this.continue}>Next</Button>
+				<Button btnType="Success" clicked={this.continue}>Next</Button>
 			</form>
 		);
 
