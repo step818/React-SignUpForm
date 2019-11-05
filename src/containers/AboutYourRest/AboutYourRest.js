@@ -7,7 +7,7 @@ import classes from './AboutYourRest.css';
 
 class AboutYourRest extends Component {
 	state = {
-		restaurantInfo: {
+		stepTwoForm: {
 			restaurantName: {
 				elementType: 'input',
 				elementConfig: {
@@ -102,6 +102,27 @@ class AboutYourRest extends Component {
 		},
 		formisValid: false
 	}
+	handleChange = (e, formElement) => {
+		console.log("formElement: ", formElement);
+		const updatedStepTwoForm = {
+			...this.state.stepTwoForm
+		};
+		const updatedFormElement = {
+			...updatedStepTwoForm[formElement]
+		};
+		// 
+		updatedFormElement.value = e.target.value;
+		// updatedFormElement.valid = this.checkValidity(updatedFormElement, 
+		// formElement.config.validation);
+		updatedFormElement.touched = true;
+		updatedStepTwoForm[formElement] = updatedFormElement;
+		// check to see if the step is valid
+		// let updatedFormIsValid = true;
+		// for (let formElement in updatedStepTwoForm) {
+		// 	updatedFormIsValid = updatedStepTwoForm[formElement].valid && updatedFormIsValid;
+		// }
+		this.setState({stepTwoForm: updatedStepTwoForm});
+	}
 	//
 	previous = e => {
 		e.preventDefault();
@@ -114,12 +135,11 @@ class AboutYourRest extends Component {
 	}
 
 	render() {
-		const { value, handleChange, formIsValid } = this.props;
 		const formElementsArray = [];
-		for (let key in this.props.restaurantInfo) {
+		for (let key in this.state.stepTwoForm) {
 			formElementsArray.push({
 				id: key,
-				config: this.props.restaurantInfo[key]
+				config: this.state.stepTwoForm[key]
 			});
 		}
 		let form = (
@@ -129,12 +149,12 @@ class AboutYourRest extends Component {
 						valueType={formElement.id}
 						elementType={formElement.config.elementType}
 						elementConfig={formElement.config.elementConfig}
-						value={value}
+						value={formElement.config.value}
 						key={formElement.id}
 						touched={formElement.config.touched}
 						shouldValidate={formElement.config.validation}
-						invalid={!formIsValid}
-						changed={handleChange(formElement)} />
+						invalid={!formElement.config.valid}
+						changed={(e) => this.handleChange(e, formElement.id)}/>
 				))}
 				<Button btnType="Danger" clicked={this.previous}>Back</Button>
 				<Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.continue}>Next</Button>

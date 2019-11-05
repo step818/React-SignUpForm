@@ -64,45 +64,48 @@ class AboutYou extends Component {
 		formIsValid: false
 	}
 
-	handleChange = formElement => e => {
+	stepOneHandler = (e) => {
+		e.preventDefault();
+		const formData = {};
+		for (let formElementIdentifier in this.state.stepOneForm) {
+			formData[formElementIdentifier] = this.state.stepOneForm[formElementIdentifier].value;
+		}
+	}
+
+	handleChange = (e, formElement) => {
 		console.log("formElement: ", formElement);
-		const value = e.target.value;
-		const updatedSignUp = {
+		const updatedStepOneForm = {
 			...this.state.stepOneForm
 		};
 		const updatedFormElement = {
-			...updatedSignUp[formElement]
+			...updatedStepOneForm[formElement]
 		};
+		// 
 		updatedFormElement.value = e.target.value;
 		// updatedFormElement.valid = this.checkValidity(updatedFormElement, 
 		// formElement.config.validation);
 		updatedFormElement.touched = true;
-		updatedSignUp[formElement] = updatedFormElement;
+		updatedStepOneForm[formElement] = updatedFormElement;
 		// check to see if the step is valid
-		let updatedFormIsValid = true;
-		for (let formElement in updatedSignUp) {
-			updatedFormIsValid = updatedSignUp[formElement].valid && updatedFormIsValid;
-		}
-
-		this.setState({[formElement] : value, formIsValid: updatedFormIsValid});
-		}
+		// let updatedFormIsValid = true;
+		// for (let formElement in updatedStepOneForm) {
+		// 	updatedFormIsValid = updatedStepOneForm[formElement].valid && updatedFormIsValid;
+		// }
+		this.setState({stepOneForm: updatedStepOneForm});
+	}
 	
-
 	continue = e => {
 		e.preventDefault();
 		this.props.nextStep();
 	}
 	render() {
-		// pass arguments as props
-		const { value, handleChange, personalInfo } = this.props;
-		// map props to a form
 		const formElementsArray = [];
-		// for each array within personalInfo array
-		// push an id and tag element(config) to be able to access other info
-		for (let key in personalInfo) {
+		// for each array within stepOneForm array
+		// push an id and tag element(config) to be able to  access other info
+		for (let key in this.state.stepOneForm) {
 			formElementsArray.push({
 				id: key,
-				config: personalInfo[key]
+				config: this.state.stepOneForm[key]
 			});
 			console.log("formElementsArray: ", formElementsArray);
 		}
@@ -111,6 +114,7 @@ class AboutYou extends Component {
 			<form onSubmit={this.stepOneHandler}>
 				{formElementsArray.map(formElement => (
 					<Input
+						valueType={formElement.id}
 						elementType={formElement.config.elementType}
 						elementConfig={formElement.config.elementConfig}
 						value={formElement.config.value}
@@ -118,9 +122,10 @@ class AboutYou extends Component {
 						touched={formElement.config.touched}
 						shouldValidate={formElement.config.validation}
 						invalid={!formElement.config.valid}
-						changed={handleChange(formElement)} />
+						changed={(e) => this.handleChange(e,formElement.id)} />
 				))}
-				<Button btnType="Success" disabled={!this.props.formIsValid}  clicked={this.continue}>Next</Button>
+				{/* disabled={!this.state.formIsValid} */}
+				<Button btnType="Success"   clicked={this.continue}>Next</Button>
 			</form>
 		);
 
