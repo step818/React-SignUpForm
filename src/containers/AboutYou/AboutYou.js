@@ -7,59 +7,86 @@ import classes from './AboutYou.css';
 
 class AboutYou extends Component {
 	state = {
-		firstName: {
-			elementType: 'input',
-			elementConfig: {
-				type: 'text',
-				placeholder: 'First Name'
+		stepOneForm: {
+			firstName: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'First Name'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
 			},
-			value: '',
-			validation: {
-				required: true
+			lastName: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Last Name'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
 			},
-			valid: false,
-			touched: false
+			emailAddress: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'email',
+					placeholder: 'Email Address'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			phoneNumber: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Phone Number'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			}
 		},
-		lastName: {
-			elementType: 'input',
-			elementConfig: {
-				type: 'text',
-				placeholder: 'Last Name'
-			},
-			value: '',
-			validation: {
-				required: true
-			},
-			valid: false,
-			touched: false
-		},
-		emailAddress: {
-			elementType: 'input',
-			elementConfig: {
-				type: 'email',
-				placeholder: 'Email Address'
-			},
-			value: '',
-			validation: {
-				required: true
-			},
-			valid: false,
-			touched: false
-		},
-		phoneNumber: {
-			elementType: 'input',
-			elementConfig: {
-				type: 'text',
-				placeholder: 'Phone Number'
-			},
-			value: '',
-			validation: {
-				required: true
-			},
-			valid: false,
-			touched: false
-		}
+		formIsValid: false
 	}
+
+	handleChange = formElement => e => {
+		console.log("formElement: ", formElement);
+		const value = e.target.value;
+		const updatedSignUp = {
+			...this.state.stepOneForm
+		};
+		const updatedFormElement = {
+			...updatedSignUp[formElement]
+		};
+		updatedFormElement.value = e.target.value;
+		// updatedFormElement.valid = this.checkValidity(updatedFormElement, 
+		// formElement.config.validation);
+		updatedFormElement.touched = true;
+		updatedSignUp[formElement] = updatedFormElement;
+		// check to see if the step is valid
+		let updatedFormIsValid = true;
+		for (let formElement in updatedSignUp) {
+			updatedFormIsValid = updatedSignUp[formElement].valid && updatedFormIsValid;
+		}
+
+		this.setState({[formElement] : value, formIsValid: updatedFormIsValid});
+		}
+	
 
 	continue = e => {
 		e.preventDefault();

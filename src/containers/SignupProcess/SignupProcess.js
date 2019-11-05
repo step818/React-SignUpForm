@@ -139,46 +139,7 @@ class SignupProcess extends Component {
             step: step - 1
         });
 		}
-    handleChange = formElement => e => {
-				console.log("formElement: ", formElement);
-        const value = e.target.value;
-        const updatedSignUp = {
-            ...this.state.signUp
-				};
-				// make an array of the names of the steps.
-				// i.e. {id: personalInfo, id: restaurantInfo, id: menu, ... }
-				const categories = [];
-				for (let key in updatedSignUp) {
-					categories.push({
-						id: key
-					});
-					console.log("categories: ", categories);
-				}
-				// let category be the name of each step to be able
-				// to only reset that category's state
-				let category = categories[this.state.step -1];
-				console.log("category!!!!: ", category);
-
-        let updatedForm = {
-            ...updatedSignUp[category]
-        };
-        console.log("please work: updatedForm: ", updatedForm);
-        const updatedFormElement = {
-            ...updatedForm[formElement]
-        };
-        updatedFormElement.value = value;
-        updatedFormElement.valid = this.checkValidity(updatedFormElement, 
-        formElement.config.validation);
-        updatedForm[formElement] = updatedFormElement;
-        let updatedFormIsValid = true;
-        for (let formElement in updatedForm) {
-            console.log("vld: ",formElement);
-            updatedFormIsValid = updatedForm[updatedFormElement].valid && updatedFormIsValid;
-            console.log("updatedForm[updatedFormElement].valid: ", updatedForm[updatedFormElement].valid);
-        }
-
-        this.setState({[formElement] : value, formIsValid: updatedFormIsValid});
-    }
+    
     // Check user follows rules of each input
 	checkValidity = (value, rules) => {
 		let isValid = true;
