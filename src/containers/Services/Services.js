@@ -13,7 +13,7 @@ export class Services extends Component {
 						options: [
 								{value: 'dineIn', displayValue: 'Dine In'},
 								{value: 'takeOut', displayValue: 'Take Out'},
-								{value: 'dineInAndTakeOut', displayValue: 'Both'}
+								{value: 'dineInAndTakeOut', displayValue: 'Dine In & Take Out'}
 						]
 				},
 				touched: false,
