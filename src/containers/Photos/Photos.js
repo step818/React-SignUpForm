@@ -12,8 +12,8 @@ export class Photos extends Component {
 				elementType: 'radio',
 				elementConfig: {
 					options: [
-						{value: 'Option 1'},
-						{Value: 'Option 2'}
+						{value: 'Option 1', displayValue: 'Option 1'},
+						{Value: 'Option 2', displayValue: 'Option 2'}
 					]
 				},
 				value: '',
@@ -25,6 +25,30 @@ export class Photos extends Component {
 				isOption2: false,
 				date: '',
 				time: ''
+			},
+			preferedDate: {
+				elementType: 'date',
+				elementConfig: {
+					type: 'date'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			},
+			preferredTime: {
+				elementType: 'time',
+				elementConfig: {
+					type: 'time'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
 			}
 		}
 	}

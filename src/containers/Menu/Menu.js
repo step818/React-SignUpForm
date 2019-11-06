@@ -74,15 +74,15 @@ export class Menu extends Component {
 		<form onSubmit={this.stepThreeHandler}>
 		{formElementsArray.map(formElement => (
 			<Input
-			valueType={formElement.id}
-			elementType={formElement.config.elementType}
-			elementConfig={formElement.config.elementConfig}
-			value={formElement.config.value}
-			key={formElement.id}
-			touched={formElement.config.touched}
-			shouldValidate={formElement.config.validation}
-			invalid={!formElement.config.valid}
-			changed={(e) => this.handleChange(e, formElement.id)} />
+				valueType={formElement.id}
+				elementType={formElement.config.elementType}
+				elementConfig={formElement.config.elementConfig}
+				value={formElement.config.value}
+				key={formElement.id}
+				touched={formElement.config.touched}
+				shouldValidate={formElement.config.validation}
+				invalid={!formElement.config.valid}
+				changed={(e) => this.handleChange(e, formElement.id)} />
 		))}
 		<Button btnType="Danger" clicked={this.previous}>Back</Button>
 		<Button btnType="Success" clicked={this.continue}>Next</Button>

@@ -8,7 +8,18 @@ import classes from './Confirm.css';
 export class Confirm extends Component {
 	state = {
 		stepSevenForm: {
-			agreed: false
+			agreed: {
+				elementType: 'checkbox',
+				elementConfig: {
+					type: 'checkbox'
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false
+			}
 		}
 	}
 
@@ -75,6 +86,7 @@ export class Confirm extends Component {
 			<Auxillary>
 				<div className={classes.Confirm}>
 					<p>Terms and conditions</p>
+					<p>By checking the box, I agree to Terms and Conditions Agreement and Merchant Terms of Use</p>
 					{form}
 				</div>
 			</Auxillary>
