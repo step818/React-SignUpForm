@@ -45,60 +45,60 @@ class SignupProcess extends Component {
 		return isValid;
 	}
 
-		render() {
-				const { step } = this.state;
-			
-				switch(step) {
-						case 1:
-								return (
-										<AboutYou
-												nextStep={this.nextStep}
-												/>
-								)
-						case 2:
-								return (
-										<AboutYourRest
-												nextStep={this.nextStep}
-												prevStep={this.prevStep}
-												/>
-								)
-						case 3:
-								return (
-										<Menu 
-												nextStep={this.nextStep}
-												prevStep={this.prevStep}
-												/>
-								)
-						case 4:
-								return (
-										<Services 
-												nextStep={this.nextStep}
-												prevStep={this.prevStep}/>
-								)
-						case 5:
-								return (
-										<Photos 
-												nextStep={this.nextStep}
-												prevStep={this.prevStep}/>
-								)
-						case 6:
-								return (
-										<Checkout 
-												nextStep={this.nextStep}
-												prevStep={this.prevStep}/>
-								)
-						case 7:
-								return (
-										<Confirm
-												nextStep={this.nextStep}
-												prevStep={this.prevStep}/>
-								)
-						case 8:
-								return (
-									<Success/>			
-								)
-				}
-		}
+	render() {
+		const { step } = this.state;
+	
+		switch(step) {
+			case 1:
+				return (
+					<AboutYou
+						nextStep={this.nextStep}
+							/>
+					)
+				case 2:
+					return (
+						<AboutYourRest
+							nextStep={this.nextStep}
+							prevStep={this.prevStep}
+						/>
+					)
+				case 3:
+					return (
+							<Menu 
+									nextStep={this.nextStep}
+									prevStep={this.prevStep}
+									/>
+						)
+					case 4:
+							return (
+									<Services 
+											nextStep={this.nextStep}
+											prevStep={this.prevStep}/>
+							)
+					case 5:
+							return (
+									<Photos 
+											nextStep={this.nextStep}
+											prevStep={this.prevStep}/>
+							)
+					case 6:
+							return (
+									<Checkout 
+											nextStep={this.nextStep}
+											prevStep={this.prevStep}/>
+							)
+					case 7:
+							return (
+									<Confirm
+											nextStep={this.nextStep}
+											prevStep={this.prevStep}/>
+							)
+					case 8:
+							return (
+								<Success/>			
+							)
+			}
+	}
 }
 
 export default SignupProcess;

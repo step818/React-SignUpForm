@@ -8,22 +8,24 @@ import Auxillary from '../../hoc/Auxillary/Auxillary';
 export class Photos extends Component {
 	state = {
 		stepFiveForm: {
-			elementType: 'select',
-                elementConfig: {
-                    options: [
-                        {value: 'Option 1'},
-                        {Value: 'Option 2'}
-                    ]
-                },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false,
-                isOption2: false,
-                date: '',
-                time: ''
+			photoMethod: {
+				elementType: 'radio',
+				elementConfig: {
+					options: [
+						{value: 'Option 1'},
+						{Value: 'Option 2'}
+					]
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false,
+				touched: false,
+				isOption2: false,
+				date: '',
+				time: ''
+			}
 		}
 	}
 
@@ -35,9 +37,9 @@ export class Photos extends Component {
 		const updatedFormElement = {
 			...updatedStepFiveForm[formElement]
 		};
-		// 
+		//
 		updatedFormElement.value = e.target.value;
-		// updatedFormElement.valid = this.checkValidity(updatedFormElement, 
+		// updatedFormElement.valid = this.checkValidity(updatedFormElement,
 		// formElement.config.validation);
 		updatedFormElement.touched = true;
 		updatedStepFiveForm[formElement] = updatedFormElement;
@@ -81,20 +83,20 @@ export class Photos extends Component {
 						shouldValidate={formElement.config.validation}
 						invalid={!formElement.config.valid}
 						changed={(e) => this.handleChange(e, formElement.id)}/>
-				))}
-				{/* disabled={!this.state.formIsValid} */}
-				<Button btnType="Danger" clicked={this.previous}>Back</Button>
-				<Button btnType="Success"  clicked={this.continue}>Next</Button>
-			</form>
-		);
-		return (
-			<Auxillary>
-				<div className={classes.Photos}>
-					<p>Add photos to your TableFlash menu</p>
-					{form}
-				</div>
-			</Auxillary>
-		)
+					))}
+							{/* disabled={!this.state.formIsValid} */}
+							<Button btnType="Danger" clicked={this.previous}>Back</Button>
+							<Button btnType="Success"  clicked={this.continue}>Next</Button>
+				</form>
+	);
+	return (
+				<Auxillary>
+							<div className={classes.Photos}>
+										<p>Add photos to your TableFlash menu</p>
+										{form}
+							</div>
+				</Auxillary>
+	)
 	}
 }
 
