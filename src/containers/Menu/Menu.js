@@ -17,7 +17,7 @@ export class Menu extends Component {
 				},
 				value: 'link',
 				validation: {
-					required: true
+					
 				},
 				valid: true,
 				touched: false
@@ -27,6 +27,16 @@ export class Menu extends Component {
 				elementConfig: {
 					type: 'url',
 					placeholder: 'http://www.menu-example.com'
+				},
+				value: '',
+				validation: {},
+				valid: false,
+				touched: false
+			},
+			fileMethod: {
+				elementType: 'file',
+				elementConfig: {
+					type: 'hidden',
 				},
 				value: '',
 				validation: {},
@@ -44,8 +54,17 @@ export class Menu extends Component {
 	const updatedFormElement = {
 		...updatedStepThreeForm[formElement]
 	};
+	console.log("formElement: ", formElement);
 	// 
 	updatedFormElement.value = e.target.value;
+	if (updatedFormElement.value === 'file') {
+		updatedStepThreeForm.fileMethod.elementConfig.type = "file";
+	}
+	else if (updatedFormElement.value === 'link'){
+		updatedStepThreeForm.fileMethod.elementConfig.type = "hidden";
+		updatedStepThreeForm.fileMethod.valid = true;
+		updatedStepThreeForm.fileMethod.touched = true;
+	}
 	updatedFormElement.valid = this.checkValidity(updatedFormElement, 
 	updatedFormElement.validation);
 	updatedFormElement.touched = true;
