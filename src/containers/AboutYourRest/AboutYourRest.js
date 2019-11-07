@@ -112,16 +112,32 @@ class AboutYourRest extends Component {
 		};
 		// 
 		updatedFormElement.value = e.target.value;
-		// updatedFormElement.valid = this.checkValidity(updatedFormElement, 
-		// formElement.config.validation);
+		updatedFormElement.valid = this.checkValidity(updatedFormElement, 
+		updatedFormElement.validation);
 		updatedFormElement.touched = true;
 		updatedStepTwoForm[formElement] = updatedFormElement;
 		// check to see if the step is valid
-		// let updatedFormIsValid = true;
-		// for (let formElement in updatedStepTwoForm) {
-		// 	updatedFormIsValid = updatedStepTwoForm[formElement].valid && updatedFormIsValid;
-		// }
+		let updatedFormIsValid = true;
+		for (let formElement in updatedStepTwoForm) {
+			updatedFormIsValid = updatedStepTwoForm[formElement].valid && updatedFormIsValid;
+		}
 		this.setState({stepTwoForm: updatedStepTwoForm});
+	}
+
+	// Check user follows rules of each input
+	checkValidity = (value, rules) => {
+		let isValid = true;
+		if (rules.required) {
+			console.log("peepee");
+			isValid = value.value.trim() !== '' && isValid;
+		}
+		if (rules.minLength) {
+			isValid = (value.value.length >= rules.minLength) && isValid;
+		}
+		if (rules.maxLength) {
+			isValid = (value.value.length <= rules.maxLength) && isValid;
+				}
+		return isValid;
 	}
 	//
 	previous = e => {

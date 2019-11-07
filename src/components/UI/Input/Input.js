@@ -29,6 +29,7 @@ const input = (props) => {
             inputElement = (
                 <select
                     className={inputClasses.join(' ')}
+                    {...props.elementConfig}
                     value={props.value}
                     onChange={props.changed}>
                         {props.elementConfig.options.map(option => (
@@ -41,26 +42,26 @@ const input = (props) => {
             break;
         case ('radio'):
             inputElement = (
-              <div>
-                {props.elementConfig.options.map(option => (
-                  <label>
-                    <input
-                      type="radio"
-                      value={option.value}
-                      onChange={props.changed}/>
-                        {option.displayValue}
-                  </label>
-                ))}
-              </div>
+                <div>
+                    {props.elementConfig.options.map(option => (
+                        <label>
+                            <input
+                                type="radio"
+                                value={option.value}
+                                onChange={props.changed}/>
+                                {option.displayValue}
+                        </label>
+                    ))}
+                </div>
             );
             break;
         case ('checkbox'):
             inputElement = <input
-                  type="checkbox"
-                  className={inputClasses.join(' ')}
-                  {...props.elementConfig}
-                  value={props.value}
-                  onChange={props.changed}/>
+                type="checkbox"
+                className={inputClasses.join(' ')}
+                {...props.elementConfig}
+                value={props.value}
+                onChange={props.changed}/>
             break;
         default:
             inputElement = <input

@@ -30,20 +30,6 @@ class SignupProcess extends Component {
 				});
 		}
 		
-		// Check user follows rules of each input
-	checkValidity = (value, rules) => {
-		let isValid = true;
-		if (rules.required) {
-			isValid = value.value.trim() !== '' && isValid;
-		}
-		if (rules.minLength) {
-			isValid = (value.value.length >= rules.minLength) && isValid;
-		}
-		if (rules.maxLength) {
-			isValid = (value.value.length <= rules.maxLength) && isValid;
-				}
-		return isValid;
-	}
 
 	render() {
 		const { step } = this.state;
@@ -94,6 +80,7 @@ class SignupProcess extends Component {
 											prevStep={this.prevStep}/>
 							)
 					case 8:
+						console.log("hello earth!");
 							return (
 								<Success/>			
 							)
