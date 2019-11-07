@@ -21,7 +21,8 @@ export class Services extends Component {
 				validation: {},
 				valid: true
 			}
-		}
+		},
+		formIsValid: true
 	}
 
 	handleChange = (e, formElement) => {
@@ -43,7 +44,7 @@ export class Services extends Component {
 		for (let formElement in updatedStepFourForm) {
 			updatedFormIsValid = updatedStepFourForm[formElement].valid && updatedFormIsValid;
 		}
-		this.setState({stepFourForm: updatedStepFourForm});
+		this.setState({stepFourForm: updatedStepFourForm, formIsValid: updatedFormIsValid});
 	}
 
 	// Check user follows rules of each input
@@ -97,7 +98,7 @@ export class Services extends Component {
 				))}
 				{/* disabled={!this.state.formIsValid} */}
 				<Button btnType="Danger" clicked={this.previous}>Back</Button>
-				<Button btnType="Success"  clicked={this.continue}>Next</Button>
+				<Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.continue}>Next</Button>
 			</form>
 		)
 		return (

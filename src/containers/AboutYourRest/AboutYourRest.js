@@ -103,7 +103,6 @@ class AboutYourRest extends Component {
 		formisValid: false
 	}
 	handleChange = (e, formElement) => {
-		console.log("formElement: ", formElement);
 		const updatedStepTwoForm = {
 			...this.state.stepTwoForm
 		};
@@ -121,14 +120,13 @@ class AboutYourRest extends Component {
 		for (let formElement in updatedStepTwoForm) {
 			updatedFormIsValid = updatedStepTwoForm[formElement].valid && updatedFormIsValid;
 		}
-		this.setState({stepTwoForm: updatedStepTwoForm});
+		this.setState({stepTwoForm: updatedStepTwoForm, formIsValid: updatedFormIsValid});
 	}
 
 	// Check user follows rules of each input
 	checkValidity = (value, rules) => {
 		let isValid = true;
 		if (rules.required) {
-			console.log("peepee");
 			isValid = value.value.trim() !== '' && isValid;
 		}
 		if (rules.minLength) {
@@ -172,9 +170,8 @@ class AboutYourRest extends Component {
 						invalid={!formElement.config.valid}
 						changed={(e) => this.handleChange(e, formElement.id)}/>
 				))}
-				{/* disabled={!this.state.formIsValid} */}
 				<Button btnType="Danger" clicked={this.previous}>Back</Button>
-				<Button btnType="Success"  clicked={this.continue}>Next</Button>
+				<Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.continue}>Next</Button>
 			</form>
 		);
 		return (

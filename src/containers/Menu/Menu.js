@@ -19,7 +19,7 @@ export class Menu extends Component {
 				validation: {
 					required: true
 				},
-				valid: false,
+				valid: true,
 				touched: false
 			},
 			linkMethod: {
@@ -33,7 +33,8 @@ export class Menu extends Component {
 				valid: true,
 				touched: true
 			}
-		}
+		},
+		formIsValid: false
 	}
 
 	handleChange = (e, formElement) => {
@@ -54,7 +55,7 @@ export class Menu extends Component {
 	for (let formElement in updatedStepThreeForm) {
 		updatedFormIsValid = updatedStepThreeForm[formElement].valid && updatedFormIsValid;
 	}
-	this.setState({stepThreeForm: updatedStepThreeForm});
+	this.setState({stepThreeForm: updatedStepThreeForm, formIsValid: updatedFormIsValid});
 	}
 
 	// Check user follows rules of each input
@@ -106,7 +107,7 @@ export class Menu extends Component {
 				changed={(e) => this.handleChange(e, formElement.id)} />
 		))}
 		<Button btnType="Danger" clicked={this.previous}>Back</Button>
-		<Button btnType="Success" clicked={this.continue}>Next</Button>
+		<Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.continue}>Next</Button>
 		</form>
 	);
 	return (

@@ -90,7 +90,7 @@ class AboutYou extends Component {
 		for (let formElement in updatedStepOneForm) {
 			updatedFormIsValid = updatedStepOneForm[formElement].valid && updatedFormIsValid;
 		}
-		this.setState({stepOneForm: updatedStepOneForm});
+		this.setState({stepOneForm: updatedStepOneForm, formIsValid: updatedFormIsValid});
 	}
 
 	// Check user follows rules of each input
@@ -137,8 +137,7 @@ class AboutYou extends Component {
 						invalid={!formElement.config.valid}
 						changed={(e) => this.handleChange(e, formElement.id)} />
 				))}
-				{/* disabled={!this.state.formIsValid} */}
-				<Button btnType="Success" clicked={this.continue}>Next</Button>
+				<Button btnType="Success"  disabled={!this.state.formIsValid} clicked={this.continue}>Next</Button>
 			</form>
 		);
 

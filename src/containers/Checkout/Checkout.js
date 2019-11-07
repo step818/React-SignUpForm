@@ -64,7 +64,8 @@ export class Checkout extends Component {
 				valid: false,
 				touched: false
 			}
-		}
+		},
+		formIsValid: false
 	}
 
 	handleChange = (e, formElement) => {
@@ -85,7 +86,7 @@ export class Checkout extends Component {
 		for (let formElement in updatedStepSixForm) {
 			updatedFormIsValid = updatedStepSixForm[formElement].valid && updatedFormIsValid;
 		}
-		this.setState({stepSixForm: updatedStepSixForm});
+		this.setState({stepSixForm: updatedStepSixForm, formIsValid: updatedFormIsValid});
 	}
 
 	// Check user follows rules of each input
@@ -135,9 +136,8 @@ export class Checkout extends Component {
 						invalid={!formElement.config.valid}
 						changed={(e) => this.handleChange(e, formElement.id)}/>
 				))}
-				{/* disabled={!this.state.formIsValid} */}
 				<Button btnType="Danger" clicked={this.previous}>Back</Button>
-				<Button btnType="Success"  clicked={this.continue}>Next</Button>
+				<Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.continue}>Next</Button>
 			</form>
 		);
 		return (
