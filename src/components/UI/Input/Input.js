@@ -48,6 +48,7 @@ const input = (props) => {
                             <input
                                 type="radio"
                                 value={option.value}
+                                name="same"
                                 onChange={props.changed}/>
                                 {option.displayValue}
                         </label>

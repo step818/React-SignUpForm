@@ -37,7 +37,6 @@ export class Menu extends Component {
 	}
 
 	handleChange = (e, formElement) => {
-	console.log("formElement: ", formElement);
 	const updatedStepThreeForm = {
 		...this.state.stepThreeForm
 	};
@@ -62,7 +61,6 @@ export class Menu extends Component {
 	checkValidity = (value, rules) => {
 		let isValid = true;
 		if (rules.required) {
-			console.log("peepee");
 			isValid = value.value.trim() !== '' && isValid;
 		}
 		if (rules.minLength) {

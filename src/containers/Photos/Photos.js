@@ -12,8 +12,8 @@ export class Photos extends Component {
 				elementType: 'radio',
 				elementConfig: {
 					options: [
-						{value: 'Option 1', displayValue: 'Option 1'},
-						{Value: 'Option 2', displayValue: 'Option 2'}
+						{value: 'Option 1', name: 'photoOpt', displayValue: 'Option 1 - Submit your own professional photos.'},
+						{value: 'Option 2', name: 'photoOpt', displayValue: 'Option 2 - Schedule a FREE professional photoshoot. Choose a preferred date and time below.'}
 					]
 				},
 				value: '',
@@ -22,7 +22,6 @@ export class Photos extends Component {
 				},
 				valid: false,
 				touched: false,
-				isOption2: false,
 				date: '',
 				time: ''
 			},
@@ -61,7 +60,7 @@ export class Photos extends Component {
 		const updatedFormElement = {
 			...updatedStepFiveForm[formElement]
 		};
-		//
+		// set value to a variable to be able to pass as argument.
 		updatedFormElement.value = e.target.value;
 		updatedFormElement.valid = this.checkValidity(updatedFormElement,
 		updatedFormElement.validation);
@@ -79,7 +78,7 @@ export class Photos extends Component {
 	checkValidity = (value, rules) => {
 		let isValid = true;
 		if (rules.required) {
-			console.log("peepee");
+
 			isValid = value.value.trim() !== '' && isValid;
 		}
 		if (rules.minLength) {

@@ -73,7 +73,6 @@ class AboutYou extends Component {
 	}
 
 	handleChange = (e, formElement) => {
-		console.log("formElement: ", formElement);
 		const updatedStepOneForm = {
 			...this.state.stepOneForm
 		};
@@ -98,7 +97,6 @@ class AboutYou extends Component {
 	checkValidity = (value, rules) => {
 		let isValid = true;
 		if (rules.required) {
-			console.log("peepee");
 			isValid = value.value.trim() !== '' && isValid;
 		}
 		if (rules.minLength) {

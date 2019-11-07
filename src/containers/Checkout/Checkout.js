@@ -68,7 +68,6 @@ export class Checkout extends Component {
 	}
 
 	handleChange = (e, formElement) => {
-		console.log("formElement: ", formElement);
 		const updatedStepSixForm = {
 			...this.state.stepSixForm
 		};
@@ -93,7 +92,6 @@ export class Checkout extends Component {
 	checkValidity = (value, rules) => {
 		let isValid = true;
 		if (rules.required) {
-			console.log("peepee");
 			isValid = value.value.trim() !== '' && isValid;
 		}
 		if (rules.minLength) {
