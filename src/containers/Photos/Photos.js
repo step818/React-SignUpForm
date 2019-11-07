@@ -12,8 +12,8 @@ export class Photos extends Component {
 				elementType: 'radio',
 				elementConfig: {
 					options: [
-						{value: 'Option 1', name: 'photoOpt', displayValue: 'Option 1 - Submit your own professional photos.'},
-						{value: 'Option 2', name: 'photoOpt', displayValue: 'Option 2 - Schedule a FREE professional photoshoot. Choose a preferred date and time below.'}
+						{value: 'Option 1', displayValue: 'Option 1 - Submit your own professional photos.'},
+						{value: 'Option 2', displayValue: 'Option 2 - Schedule a FREE professional photoshoot. Choose a preferred date and time below.'}
 					]
 				},
 				value: '',

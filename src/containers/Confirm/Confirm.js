@@ -13,7 +13,7 @@ export class Confirm extends Component {
 				elementConfig: {
 					type: 'checkbox'
 				},
-				value: '',
+				value: ' agreed',
 				validation: {
 					required: true
 				},
@@ -32,18 +32,48 @@ export class Confirm extends Component {
 			...updatedStepSevenForm[formElement]
 		};
 		// 
-		updatedFormElement.value = e.target.value;
-		// updatedFormElement.valid = this.checkValidity(updatedFormElement, 
-		// formElement.config.validation);
-		updatedFormElement.touched = true;
+		console.log("updatedFormElement.value: ", updatedFormElement.value);
+		updatedFormElement.valid = this.checkValidity(updatedFormElement, 
+		updatedFormElement.validation);
+		if (updatedFormElement.valid === true) {
+			updatedFormElement.value = "not agreed";
+			updatedFormElement.touched = true;
+		}
+		else if (updatedFormElement.valid === false) {
+			updatedFormElement.value = ' agreed';
+			updatedFormElement.touched = false;
+		}
 		updatedStepSevenForm[formElement] = updatedFormElement;
 		// check to see if the step is valid
-		// let updatedFormIsValid = true;
-		// for (let formElement in updatedStepSevenForm) {
-		// 	updatedFormIsValid = updatedStepSevenForm[formElement].valid && updatedFormIsValid;
-		// }
+		let updatedFormIsValid = true;
+		for (let formElement in updatedStepSevenForm) {
+			updatedFormIsValid = updatedStepSevenForm[formElement].valid && updatedFormIsValid;
+		}
 		this.setState({stepSevenForm: updatedStepSevenForm});
 	}
+
+	// Check user follows rules of each input
+	checkValidity = (value, rules) => {
+		let isValid = true;
+		if (rules.required) {
+			if (value.value === 'not agreed') {
+				value.touched = false;
+				isValid = false;
+			}
+			else if (value.value === ' agreed') {
+				isValid = true;
+			}
+			return isValid;
+		}
+		if (rules.minLength) {
+			isValid = (value.value.length >= rules.minLength) && isValid;
+		}
+		if (rules.maxLength) {
+			isValid = (value.value.length <= rules.maxLength) && isValid;
+				}
+		return isValid;
+	}
+
 	//
 	previous = e => {
 		e.preventDefault();
