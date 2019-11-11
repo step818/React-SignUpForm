@@ -81,6 +81,7 @@ class SignupProcess extends Component {
 							)
 					case 8:
 						console.log("hello earth!");
+						console.log("{\"name\":\"Skip\", \"age\":\"12\"}");
 							return (
 								<Success/>			
 							)

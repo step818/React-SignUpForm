@@ -110,6 +110,10 @@ class AboutYou extends Component {
 	
 	continue = e => {
 		e.preventDefault();
+		for (let key in this.state.stepOneForm) {
+			console.log(JSON.stringify(this.state.stepOneForm[key].value));
+		}
+		// console.log(JSON.stringify(this.state.stepOneForm));
 		this.props.nextStep();
 	}
 	render() {
