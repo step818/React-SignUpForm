@@ -46,9 +46,12 @@ const input = (props) => {
                     {props.elementConfig.options.map(option => (
                         <label>
                             <input
+                                className={inputClasses.join(' ')}
                                 type="radio"
                                 value={option.value}
                                 name="same"
+                                {...props.elementConfig}
+                                key={props.key}
                                 onChange={props.changed}/>
                                 {option.displayValue}
                         </label>
@@ -77,7 +80,8 @@ const input = (props) => {
             inputElement = <input
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
-                value={props.value} />;
+                value={props.value} 
+                onChange={props.changed}/>;
     }
     let validationError = null;
     if(props.invalid && props.touched) {

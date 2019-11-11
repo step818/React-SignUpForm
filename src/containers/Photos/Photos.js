@@ -12,18 +12,16 @@ export class Photos extends Component {
 				elementType: 'radio',
 				elementConfig: {
 					options: [
-						{value: 'Option 1', displayValue: 'Option 1 - Submit your own professional photos.'},
-						{value: 'Option 2', displayValue: 'Option 2 - Schedule a FREE professional photoshoot. Choose a preferred date and time below.'}
+						{value: 'Option1', displayValue: 'Option 1 - Submit your own professional photos.'},
+						{value: 'Option2', displayValue: 'Option 2 - Schedule a FREE professional photoshoot. Choose a preferred date and time below.'}
 					]
 				},
 				value: '',
 				validation: {
-					required: true
+					required: false
 				},
 				valid: false,
 				touched: false,
-				date: '',
-				time: ''
 			},
 			preferedDate: {
 				elementType: 'date',
@@ -49,18 +47,18 @@ export class Photos extends Component {
 				valid: false,
 				touched: false
 			}
-		}
+		},
+		formIsValid: false
 	}
 
 	handleChange = (e, formElement) => {
-		console.log("formElement: ", formElement);
 		const updatedStepFiveForm = {
 			...this.state.stepFiveForm
 		};
 		const updatedFormElement = {
 			...updatedStepFiveForm[formElement]
 		};
-		// set value to a variable to be able to pass as argument.
+		// set a variable to value to be able to pass as argument.
 		updatedFormElement.value = e.target.value;
 		updatedFormElement.valid = this.checkValidity(updatedFormElement,
 		updatedFormElement.validation);
@@ -71,14 +69,13 @@ export class Photos extends Component {
 		for (let formElement in updatedStepFiveForm) {
 			updatedFormIsValid = updatedStepFiveForm[formElement].valid && updatedFormIsValid;
 		}
-		this.setState({stepFiveForm: updatedStepFiveForm});
+		this.setState({stepFiveForm: updatedStepFiveForm, formIsValid : updatedFormIsValid});
 	}
 
 	// Check user follows rules of each input
 	checkValidity = (value, rules) => {
 		let isValid = true;
 		if (rules.required) {
-
 			isValid = value.value.trim() !== '' && isValid;
 		}
 		if (rules.minLength) {
@@ -125,7 +122,7 @@ export class Photos extends Component {
 					))}
 							{/* disabled={!this.state.formIsValid} */}
 							<Button btnType="Danger" clicked={this.previous}>Back</Button>
-							<Button btnType="Success"  clicked={this.continue}>Next</Button>
+							<Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.continue}>Next</Button>
 				</form>
 	);
 	return (

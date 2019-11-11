@@ -54,9 +54,9 @@ export class Menu extends Component {
 	const updatedFormElement = {
 		...updatedStepThreeForm[formElement]
 	};
-	console.log("formElement: ", formElement);
 	// 
 	updatedFormElement.value = e.target.value;
+	// Hide file input unless user has chosen "file"
 	if (updatedFormElement.value === 'file') {
 		updatedStepThreeForm.fileMethod.elementConfig.type = "file";
 	}
