@@ -4,6 +4,7 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Auxillary from '../../hoc/Auxillary/Auxillary';
 import classes from './Confirm.css';
+import axios from '../../axios';
 
 export class Confirm extends Component {
 	state = {
@@ -13,7 +14,7 @@ export class Confirm extends Component {
 				elementConfig: {
 					type: 'checkbox'
 				},
-				value: ' agreed',
+				value: 'agreed',
 				validation: {
 					required: true
 				},
@@ -25,7 +26,6 @@ export class Confirm extends Component {
 	}
 
 	handleChange = (e, formElement) => {
-		console.log("formElement: ", formElement);
 		const updatedStepSevenForm = {
 			...this.state.stepSevenForm
 		};
@@ -84,6 +84,27 @@ export class Confirm extends Component {
 	continue = e => {
 		e.preventDefault();
 		this.props.nextStep();
+// When next is clicked, store to the axios
+		console.log("stepSevenHandler");
+		const SignUpForm = {
+// figure how to pass propsfrom other containers to here
+			userBio: {
+				firstName: this.props.firstName,
+				lastName: this.props.lastName,
+				phoneNumber: this.props.phoneNumber,
+				email: this.props.email
+			},
+			restaurantInfo: {
+				restaurantName: this.props.restaurantName,
+// pass props from all of the other containers
+			},
+			agreeToTerms: {
+				agreed: this.state.stepSevenForm.agreed.valid
+			}
+		}
+		axios.post('/form.json', SignUpForm)
+			.then(response => console.log(response))
+			.catch(error => console.log(error));
 	}
 
 	render() {
@@ -109,7 +130,7 @@ export class Confirm extends Component {
 						changed={(e) => this.handleChange(e, formElement.id)}/>
 				))}
 				<Button btnType="Danger" clicked={this.previous}>Back</Button>
-				<Button btnType="Success" disabled={!this.state.formIsValid} clicked={this.continue}>Next</Button>
+				<Button btnType="Success" disabled={!this.state.formIsValid} onClick={this.stepSevenHandler} clicked={this.continue}>Next</Button>
 			</form>
 		);
 		return (

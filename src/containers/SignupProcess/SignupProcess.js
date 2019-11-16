@@ -80,8 +80,6 @@ class SignupProcess extends Component {
 											prevStep={this.prevStep}/>
 							)
 					case 8:
-						console.log("hello earth!");
-						console.log("{\"name\":\"Skip\", \"age\":\"12\"}");
 							return (
 								<Success/>			
 							)
