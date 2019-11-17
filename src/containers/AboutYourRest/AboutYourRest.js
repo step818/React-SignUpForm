@@ -146,6 +146,13 @@ class AboutYourRest extends Component {
 	continue = e => {
 		e.preventDefault();
 		this.props.nextStep();
+// pass state as props in each continue method
+		console.log("stepTwoHandler");
+		const formData = {};
+		for (let formElementIdentifier in this.state.stepOneForm) {
+			formData[formElementIdentifier] = this.state.stepOneForm[formElementIdentifier].value;
+		}
+		this.props.formHandler(formData);
 	}
 
 	render() {

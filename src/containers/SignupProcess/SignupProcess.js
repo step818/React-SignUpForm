@@ -1,5 +1,6 @@
 /* eslint-disable default-case */
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from '../../axios';
 
 import AboutYou from '../AboutYou/AboutYou';
 import AboutYourRest from '../AboutYourRest/AboutYourRest';
@@ -31,8 +32,23 @@ class SignupProcess extends Component {
 		}
 		
 		formHandler = (dataFromChild) => {
-
+// store data in here from all components
+// if (nex on confirm is clicked) {
+// anotherFunction(allData);
+			const formData = {
+				// aboutYou: {
+				// 	firstName: this.props.firstName,
+				// 	lastName: this.props.lasName,
+				// 	...
+				// }
+			}
+			axios.post('/form.json', formData)
+				.then(response => console.log(response))
+				.catch(error => console.log(error));
 		}
+		// anotherFunction = (allData) => {
+		// 	console.log(form data from firebase)
+		// }
 
 	render() {
 		const { step } = this.state;
@@ -42,7 +58,7 @@ class SignupProcess extends Component {
 				return (
 					<AboutYou
 						nextStep={this.nextStep}
-						callFromParent={this.formHandler}
+						formHandler={this.formHandler}
 							/>
 					)
 				case 2:
@@ -50,6 +66,7 @@ class SignupProcess extends Component {
 						<AboutYourRest
 							nextStep={this.nextStep}
 							prevStep={this.prevStep}
+							formHandler={this.formHandler}
 						/>
 					)
 				case 3:
@@ -57,31 +74,41 @@ class SignupProcess extends Component {
 							<Menu 
 									nextStep={this.nextStep}
 									prevStep={this.prevStep}
+									formHandler={this.formHandler}
 									/>
 						)
 					case 4:
 							return (
 									<Services 
 											nextStep={this.nextStep}
-											prevStep={this.prevStep}/>
+											prevStep={this.prevStep}
+											formHandler={this.formHandler}
+											/>
 							)
 					case 5:
 							return (
 									<Photos 
 											nextStep={this.nextStep}
-											prevStep={this.prevStep}/>
+											prevStep={this.prevStep}
+											formHandler={this.formHandler}
+											/>
 							)
 					case 6:
 							return (
 									<Checkout 
 											nextStep={this.nextStep}
-											prevStep={this.prevStep}/>
+											prevStep={this.prevStep}
+											formHandler={this.formHandler}
+											/>
 							)
 					case 7:
 							return (
 									<Confirm
 											nextStep={this.nextStep}
-											prevStep={this.prevStep}/>
+											prevStep={this.prevStep}
+											formHandler={this.formHandler}
+											printForm={this.printForm}
+											/>
 							)
 					case 8:
 							return (

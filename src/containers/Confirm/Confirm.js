@@ -4,7 +4,6 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Auxillary from '../../hoc/Auxillary/Auxillary';
 import classes from './Confirm.css';
-import axios from '../../axios';
 
 export class Confirm extends Component {
 	state = {
@@ -84,27 +83,13 @@ export class Confirm extends Component {
 	continue = e => {
 		e.preventDefault();
 		this.props.nextStep();
-// When next is clicked, store to the axios
+// pass state as props in each continue method
 		console.log("stepSevenHandler");
-		const SignUpForm = {
-// figure how to pass propsfrom other containers to here
-			userBio: {
-				firstName: this.props.firstName,
-				lastName: this.props.lastName,
-				phoneNumber: this.props.phoneNumber,
-				email: this.props.email
-			},
-			restaurantInfo: {
-				restaurantName: this.props.restaurantName,
-// pass props from all of the other containers
-			},
-			agreeToTerms: {
-				agreed: this.state.stepSevenForm.agreed.valid
-			}
+		const formData = {};
+		for (let formElementIdentifier in this.state.stepOneForm) {
+			formData[formElementIdentifier] = this.state.stepOneForm[formElementIdentifier].value;
 		}
-		axios.post('/form.json', SignUpForm)
-			.then(response => console.log(response))
-			.catch(error => console.log(error));
+		this.props.formHandler(formData);
 	}
 
 	render() {
