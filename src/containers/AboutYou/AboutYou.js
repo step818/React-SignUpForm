@@ -63,13 +63,14 @@ class AboutYou extends Component {
 		},
 		formIsValid: false
 	}
-
+// Use this to pass props from child to parent
 	stepOneHandler = (e) => {
 		e.preventDefault();
 		const formData = {};
 		for (let formElementIdentifier in this.state.stepOneForm) {
 			formData[formElementIdentifier] = this.state.stepOneForm[formElementIdentifier].value;
 		}
+		this.props.callFromParent();
 	}
 
 	handleChange = (e, formElement) => {
@@ -110,10 +111,6 @@ class AboutYou extends Component {
 	
 	continue = e => {
 		e.preventDefault();
-		for (let key in this.state.stepOneForm) {
-			console.log(JSON.stringify(this.state.stepOneForm[key].value));
-		}
-		// console.log(JSON.stringify(this.state.stepOneForm));
 		this.props.nextStep();
 	}
 	render() {

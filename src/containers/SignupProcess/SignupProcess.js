@@ -30,6 +30,9 @@ class SignupProcess extends Component {
 				});
 		}
 		
+		formHandler = (dataFromChild) => {
+
+		}
 
 	render() {
 		const { step } = this.state;
@@ -39,6 +42,7 @@ class SignupProcess extends Component {
 				return (
 					<AboutYou
 						nextStep={this.nextStep}
+						callFromParent={this.formHandler}
 							/>
 					)
 				case 2:
