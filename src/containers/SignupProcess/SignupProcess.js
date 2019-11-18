@@ -14,7 +14,7 @@ import Success from '../Success/Success';
 class SignupProcess extends Component {
 		state = {
 				step: 1
-				// Maybe make a form: { pInf: , rInfo: , ... } attribute
+		// Maybe make a form: { pInf: , rInfo: , ... } attribute
 		}
 		//Proceed to next step
 		nextStep = () => {
@@ -30,25 +30,26 @@ class SignupProcess extends Component {
 						step: step - 1
 				});
 		}
+	
 		
-		formHandler = (dataFromChild) => {
+		formHandler = (dataFromChild, step) => {
 // store data in here from all components
 // if (nex on confirm is clicked) {
 // anotherFunction(allData);
-			const formData = {
-				// aboutYou: {
-				// 	firstName: this.props.firstName,
-				// 	lastName: this.props.lasName,
-				// 	...
-				// }
-			}
+			const formData = { dataFromChild }
 			axios.post('/form.json', formData)
-				.then(response => console.log(response))
+				.then(response => console.log(response.data, response.status))
 				.catch(error => console.log(error));
-		}
-		// anotherFunction = (allData) => {
-		// 	console.log(form data from firebase)
-		// }
+			if ( step === 7 ) {
+				axios.get('https://stepsignup.firebaseio.com/form.json')
+					.then((response) => {
+						console.log("SignUp Data: ", response.data)
+					});
+			} 
+// switch statement was first instinct
+// keep it here in case IF statement doesnt work
+			}
+		
 
 	render() {
 		const { step } = this.state;

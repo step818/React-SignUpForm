@@ -113,7 +113,7 @@ class AboutYou extends Component {
 		for (let formElementIdentifier in this.state.stepOneForm) {
 			formData[formElementIdentifier] = this.state.stepOneForm[formElementIdentifier].value;
 		}
-		this.props.formHandler(formData);
+		this.props.formHandler(formData, 1);
 	}
 	render() {
 		const formElementsArray = [];
@@ -148,7 +148,10 @@ class AboutYou extends Component {
 			<Auxillary>
 				<div className={classes.AboutYou}>
 					<p>Tell us about your self</p>
-					{form}
+					<div className={classes.Form}>
+						{form}
+					</div>
+				
 				</div>
 			</Auxillary>
 		);

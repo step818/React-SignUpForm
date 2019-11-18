@@ -149,10 +149,10 @@ class AboutYourRest extends Component {
 // pass state as props in each continue method
 		console.log("stepTwoHandler");
 		const formData = {};
-		for (let formElementIdentifier in this.state.stepOneForm) {
-			formData[formElementIdentifier] = this.state.stepOneForm[formElementIdentifier].value;
+		for (let formElementIdentifier in this.state.stepTwoForm) {
+			formData[formElementIdentifier] = this.state.stepTwoForm[formElementIdentifier].value;
 		}
-		this.props.formHandler(formData);
+		this.props.formHandler(formData, 2);
 	}
 
 	render() {

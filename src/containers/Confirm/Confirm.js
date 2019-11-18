@@ -86,10 +86,10 @@ export class Confirm extends Component {
 // pass state as props in each continue method
 		console.log("stepSevenHandler");
 		const formData = {};
-		for (let formElementIdentifier in this.state.stepOneForm) {
-			formData[formElementIdentifier] = this.state.stepOneForm[formElementIdentifier].value;
+		for (let formElementIdentifier in this.state.stepSevenForm) {
+			formData[formElementIdentifier] = this.state.stepSevenForm[formElementIdentifier].valid;
 		}
-		this.props.formHandler(formData);
+		this.props.formHandler(formData, 7);
 	}
 
 	render() {

@@ -12,8 +12,8 @@ export class Photos extends Component {
 				elementType: 'radio',
 				elementConfig: {
 					options: [
-						{value: 'Option1', displayValue: 'Option 1 - Submit your own professional photos.'},
-						{value: 'Option2', displayValue: 'Option 2 - Schedule a FREE professional photoshoot. Choose a preferred date and time below.'}
+						{value: 'SubmitOwnPhoto', displayValue: 'Option 1 - Submit your own professional photos.'},
+						{value: 'SchedulePhoto', displayValue: 'Option 2 - Schedule a FREE professional photoshoot. Choose a preferred date and time below.'}
 					]
 				},
 				value: '',
@@ -98,8 +98,8 @@ export class Photos extends Component {
 // pass state as props in each continue method
 		console.log("stepFiveHandler");
 		const formData = {};
-		for (let formElementIdentifier in this.state.stepOneForm) {
-			formData[formElementIdentifier] = this.state.stepOneForm[formElementIdentifier].value;
+		for (let formElementIdentifier in this.state.stepFiveForm) {
+			formData[formElementIdentifier] = this.state.stepFiveForm[formElementIdentifier].value;
 		}
 		this.props.formHandler(formData);
 	}

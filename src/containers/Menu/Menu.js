@@ -103,8 +103,8 @@ export class Menu extends Component {
 // pass state as props in each continue method
 		console.log("stepThreeHandler");
 		const formData = {};
-		for (let formElementIdentifier in this.state.stepOneForm) {
-			formData[formElementIdentifier] = this.state.stepOneForm[formElementIdentifier].value;
+		for (let formElementIdentifier in this.state.stepThreeForm) {
+			formData[formElementIdentifier] = this.state.stepThreeForm[formElementIdentifier].value;
 		}
 		this.props.formHandler(formData);
 	}

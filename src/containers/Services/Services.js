@@ -74,8 +74,8 @@ export class Services extends Component {
 // pass state as props in each continue method
 		console.log("stepFourHandler");
 		const formData = {};
-		for (let formElementIdentifier in this.state.stepOneForm) {
-			formData[formElementIdentifier] = this.state.stepOneForm[formElementIdentifier].value;
+		for (let formElementIdentifier in this.state.stepFourForm) {
+			formData[formElementIdentifier] = this.state.stepFourForm[formElementIdentifier].value;
 		}
 		this.props.formHandler(formData);
 	}
