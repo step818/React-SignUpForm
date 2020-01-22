@@ -40,6 +40,7 @@ class SignupProcess extends Component {
 			axios.post('/form.json', formData)
 				.then(response => console.log(response.data, response.status))
 				.catch(error => console.log(error));
+// Print the data to the console once at end of the form
 			if ( step === 7 ) {
 				axios.get('https://stepsignup.firebaseio.com/form.json')
 					.then((response) => {
